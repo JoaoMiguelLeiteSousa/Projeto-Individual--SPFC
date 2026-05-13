@@ -1,0 +1,466 @@
+:root {
+    font-size: 62.5%;
+}
+
+/* RESET */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    transition: 0.2s linear;
+    font-family: "Roboto", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+
+.header {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 99;
+
+    background-color: rgb(172, 1, 1);
+
+    border-bottom: 3px solid white;
+
+    box-shadow: 0 0 20px black;
+}
+
+.header section {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 1rem 5%;
+}
+
+.header img {
+    width: 75px;
+}
+
+/* NAVBAR */
+
+.navbar {
+    display: flex;
+
+    align-items: center;
+
+    gap: 3rem;
+}
+
+.navbar a {
+    font-size: 1.2rem;
+
+    color: white;
+
+    font-weight: bold;
+
+    position: relative;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+.navbar a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -5px;
+
+    width: 0%;
+
+    height: 2px;
+
+    background: black;
+
+    transition: 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* SECTION */
+
+section {
+    padding: 4rem 8%;
+}
+
+/* HOME */
+
+.home-historia {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.80),
+        rgba(0, 0, 0, 0.82)),
+        url(../assets/imgs/img5.jpg);
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    height: 100vh;
+}
+
+.home-historia section {
+    display: flex;
+
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+.content {
+    max-width: 80rem;
+}
+
+.content h3 {
+    font-size: 7rem;
+
+    line-height: 1.1;
+
+    margin-bottom: 2rem;
+
+    text-shadow: 5px 5px 15px black;
+
+    text-transform: uppercase;
+}
+
+.content span {
+    color: red;
+}
+
+.content p {
+    font-size: 2rem;
+
+    line-height: 1.9;
+
+    color: rgb(220, 220, 220);
+
+    margin-bottom: 3rem;
+}
+
+/* BOTÃO */
+
+.btn {
+    background: linear-gradient(to right, red, darkred);
+
+    color: white;
+
+    padding: 1.5rem 4rem;
+
+    font-size: 1.7rem;
+
+    font-weight: bold;
+
+    border-radius: 10px;
+
+    display: inline-block;
+
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+
+    background: white;
+
+    color: red;
+}
+
+/* TITLES */
+
+.title {
+    text-align: center;
+
+    font-size: 5rem;
+
+    margin-bottom: 6rem;
+
+    text-transform: uppercase;
+
+    color: white;
+}
+
+.title span {
+    color: red;
+}
+
+/* HISTÓRIA */
+
+.historia {
+    padding-top: 10rem;
+}
+
+.container-historia {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5rem;
+}
+
+.card {
+    display: flex;
+
+    align-items: center;
+
+    background-color: rgb(15, 15, 15);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 2px solid transparent;
+
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.12);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+
+    border: 2px solid red;
+}
+
+.card.reverse {
+    flex-direction: row-reverse;
+}
+
+.card .imagem {
+    width: 50%;
+}
+
+.card .imagem img {
+    width: 100%;
+
+    height: 500px;
+
+    object-fit: cover;
+}
+
+.card .texto {
+    width: 50%;
+
+    padding: 4rem;
+}
+
+.card .texto h3 {
+    font-size: 3.8rem;
+
+    color: red;
+
+    margin-bottom: 2rem;
+
+    text-transform: uppercase;
+}
+
+.card .texto p {
+    font-size: 1.8rem;
+
+    line-height: 2;
+
+    color: rgb(220, 220, 220);
+
+    margin-bottom: 2rem;
+}
+
+/* ÍDOLOS */
+
+.idolos {
+    padding-top: 10rem;
+}
+
+.texto-idolos {
+    max-width: 1100px;
+
+    margin: 0 auto 5rem auto;
+
+    text-align: center;
+}
+
+.texto-idolos p {
+    font-size: 2rem;
+
+    line-height: 1.9;
+
+    color: rgb(220, 220, 220);
+
+    margin-bottom: 2rem;
+}
+
+.cards-idolos {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 3rem;
+}
+
+.cards-idolos .box {
+    background: rgb(15, 15, 15);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    text-align: center;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.10);
+}
+
+.cards-idolos .box:hover {
+    transform: translateY(-10px);
+
+    border: 2px solid red;
+}
+
+.cards-idolos .box img {
+    width: 100%;
+
+    height: 380px;
+
+    object-fit: cover;
+}
+
+.cards-idolos .box h3 {
+    font-size: 2.5rem;
+
+    padding: 2rem;
+
+    color: white;
+}
+
+/* MORUMBI */
+
+.morumbi {
+    padding-top: 10rem;
+}
+
+.container-morumbi {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4rem;
+
+    background: rgb(15, 15, 15);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    padding: 3rem;
+
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.12);
+}
+
+.container-morumbi .imagem {
+    width: 50%;
+}
+
+.container-morumbi .imagem img {
+    width: 100%;
+
+    height: 500px;
+
+    object-fit: cover;
+
+    border-radius: 15px;
+}
+
+.container-morumbi .texto {
+    width: 50%;
+}
+
+.container-morumbi .texto p {
+    font-size: 1.9rem;
+
+    line-height: 2;
+
+    color: rgb(220, 220, 220);
+
+    margin-bottom: 2rem;
+}
+
+/* FRASE */
+
+.frase {
+    margin-top: 10rem;
+
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.75),
+        rgba(0, 0, 0, 0.75)),
+        url(../assets/imgs/img6.jpg);
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    text-align: center;
+
+    padding: 10rem 2rem;
+}
+
+.frase h2 {
+    font-size: 5rem;
+
+    margin-bottom: 2rem;
+
+    text-shadow: 5px 5px 10px black;
+}
+
+.frase p {
+    font-size: 2rem;
+
+    color: rgb(220, 220, 220);
+}
+
+/* FOOTER */
+
+.footer {
+    margin-top: 10rem;
+
+    background-color: rgb(10, 10, 10);
+
+    border-top: 3px solid red;
+
+    text-align: center;
+
+    padding: 3rem;
+}
+
+.footer h4 {
+    font-size: 1.5rem;
+
+    font-weight: normal;
+
+    color: white;
+}

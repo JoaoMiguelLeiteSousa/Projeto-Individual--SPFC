@@ -1,52 +1,274 @@
 :root {
-    font-size: 1-px;
-}
-
-html {
-  scroll-behavior:smooth;
+    font-size: 62.5%;
 }
 
 * {
     margin: 0;
     padding: 0;
-    outline: none;
-    border: none;
+    box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-    text-transform: capitalize;
     transition: 0.2s linear;
     font-family: "Roboto", sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
+/* Body */
 body {
-    background-color: black;
+    background: black;
+    color: white;
 }
 
-section {
-    padding: 3rem 2rem;
-    margin: 0 auto;
-    max-width: 1200px;
-}
-
+/* Header */
 .header {
-    & img {
-        width: 70px;
-    }
-
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 99;
-    border-bottom: white;
+
     background-color: rgb(172, 1, 1);
+    border-bottom: 3px solid white;
+    box-shadow: 0 0 20px black;
 }
 
+/* Conteúdo da header */
 .header section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
+
+    padding: 1rem 5%;
+}
+
+/* Logo da header */
+.header img {
+    width: 75px;
+    display: block;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Links */
+.navbar a {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Hover dos links */
+.navbar a:hover {
+    color: black;
+}
+
+/* Linha animada */
+.navbar a::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    bottom: -5px;
+
+    width: 0%;
+    height: 2px;
+
+    background: black;
+    transition: 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+/* Botão */
+.btn-nav {
+    padding: 10px 22px;
+    border-radius: 12px;
+
+    border: 2px solid white;
+
+    background: linear-gradient(to right,
+            rgb(170, 0, 0),
+            rgb(70, 0, 0));
+
+    color: white;
+    font-weight: bold;
+
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+/* Hover botão */
+.btn-nav:hover {
+    background: white;
+    color: red;
+
+    border: 2px solid red;
+
+    transform: scale(1.08);
+
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Botões */
+
+.btn-nav {
+    padding: 8px 18px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: linear-gradient(to right, rgb(170, 0, 0), rgb(70, 0, 0));
+}
+
+.btn-nav:hover {
+    background: white;
+    color: red;
+}
+
+/* Elenco */
+
+.elenco {
+    padding-top: 10rem;
+    width: 90%;
+    margin: auto;
+}
+
+.elenco .title {
+    text-align: center;
+    font-size: 3.5rem;
+    margin-bottom: 4rem;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.elenco .title span {
+    color: red;
+}
+
+/* Categoria - Posições */
+
+.categoria {
+    font-size: 2.5rem;
+    color: red;
+
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Container jogadores */
+
+.container-jogadores {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 1rem;
+     margin-bottom: 5rem;
+}
+
+.container-jogadores::-webkit-scrollbar {
+    height: 10px;
+}
+
+.container-jogadores::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+}
+
+.container-jogadores::-webkit-scrollbar-track {
+    background: rgb(30, 30, 30);
+    border-radius: 10px;
+}
+
+.card-jogador {
+    min-width: 260px;
+    height: 420px;
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    border-top: 4px solid red;
+    border-bottom: 4px solid white;
+
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.15);
+}
+
+.card-jogador img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Escurece a imagem */
+
+.card-jogador::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9),
+        rgba(0, 0, 0, 0.2)
+    );
+}
+
+/* Texto em cima da imagem */
+
+.card-jogador .info {
+    position: absolute;
+    bottom: 0;
+    padding: 1.5rem;
+    z-index: 2;
+}
+
+.card-jogador h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px black;
+    font-size: 3.5rem;
+}
+
+.card-jogador p {
+    font-size: 1rem;
+    color: rgb(230, 230, 230);
+    line-height: 1.5;
+    text-shadow: 0 0 10px black;
+    font-size: 1.5rem;
+}
+
+/* Footer */
+
+.footer {
+    background: rgb(10, 10, 10);
+    border-top: 3px solid red;
+    margin-top: 5rem;
+    padding: 3rem;
+    text-align: center;
+}
+
+.footer h4 {
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+.footer span {
+    color: red;
+    font-weight: bold;
 }

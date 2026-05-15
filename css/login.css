@@ -1,3 +1,7 @@
+:root {
+    font-size: 62.5%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,6 +12,11 @@
     font-family: "Roboto", sans-serif;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body */
 body {
     background: linear-gradient(rgba(0, 0, 0, 0.75),
             rgba(0, 0, 0, 0.75)),
@@ -16,8 +25,11 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    background-attachment: fixed;
+
+    min-height: 100vh;
     color: white;
+    overflow-x: hidden;
 }
 
 /* Header */
@@ -27,48 +39,93 @@ body {
     left: 0;
     right: 0;
     z-index: 99;
+
     background-color: rgb(172, 1, 1);
     border-bottom: 3px solid white;
     box-shadow: 0 0 20px black;
 }
 
+/* Conteúdo da header */
 .header section {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 1rem 5%;
 }
 
+/* Logo da header */
 .header img {
     width: 75px;
+    display: block;
 }
 
 /* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+/* Links */
 .navbar a {
-    margin: 0 1rem;
     font-size: 1.2rem;
     color: white;
     font-weight: bold;
     position: relative;
 }
 
+/* Hover dos links */
 .navbar a:hover {
     color: black;
 }
 
+/* Linha animada */
 .navbar a::after {
     content: "";
     position: absolute;
+
     left: 0;
     bottom: -5px;
+
     width: 0%;
     height: 2px;
+
     background: black;
     transition: 0.3s;
 }
 
 .navbar a:hover::after {
     width: 100%;
+}
+
+/* Botão */
+.btn-nav {
+    padding: 10px 22px;
+    border-radius: 12px;
+
+    border: 2px solid white;
+
+    background: linear-gradient(to right,
+            rgb(170, 0, 0),
+            rgb(70, 0, 0));
+
+    color: white;
+    font-weight: bold;
+
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+/* Hover botão */
+.btn-nav:hover {
+    background: white;
+    color: red;
+
+    border: 2px solid red;
+
+    transform: scale(1.08);
+
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 /* Login */
@@ -93,7 +150,7 @@ body {
 }
 
 .card-login h2 {
-    font-size: 2.2rem;
+    font-size: 3.8rem;
     margin-bottom: 30px;
     color: white;
 }
@@ -109,6 +166,7 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
+     font-size: 1.8rem;
 }
 
 .campo span {
@@ -167,17 +225,6 @@ body {
     border-radius: 10px;
     margin-bottom: 20px;
     text-align: center;
-}
-
-/* Icon Loading */
-.loading-div {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-#loading-gif {
-    width: 50px;
 }
 
 /* footer */

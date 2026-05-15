@@ -24,55 +24,42 @@ body {
     overflow-x: hidden;
 }
 
-/* HEADER */
-
+/* Header */
 .header {
     position: fixed;
-
     top: 0;
     left: 0;
     right: 0;
-
     z-index: 99;
-
     background-color: rgb(172, 1, 1);
-
     border-bottom: 3px solid white;
-
     box-shadow: 0 0 20px black;
 }
 
 .header section {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     padding: 1rem 5%;
 }
 
+/* Logo da header */
 .header img {
     width: 75px;
+    display: block;
 }
 
-/* NAVBAR */
-
+/* Navbar (Header) */
 .navbar {
     display: flex;
-
     align-items: center;
-
     gap: 3rem;
 }
 
 .navbar a {
     font-size: 1.2rem;
-
     color: white;
-
     font-weight: bold;
-
     position: relative;
 }
 
@@ -82,23 +69,35 @@ body {
 
 .navbar a::after {
     content: "";
-
     position: absolute;
-
     left: 0;
     bottom: -5px;
-
     width: 0%;
-
     height: 2px;
-
     background: black;
-
     transition: 0.3s;
 }
 
 .navbar a:hover::after {
     width: 100%;
+}
+
+.btn-nav {
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: linear-gradient(to right, rgb(170, 0, 0), rgb(70, 0, 0));
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.btn-nav:hover {
+    background: white;
+    color: red;
+    border: 2px solid red;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 /* SECTION */

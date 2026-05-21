@@ -2,317 +2,723 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/imgs/logo.png">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Dashboards</title>
+    <title>São Paulo FC | Dashboard</title>
 
-    
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-
-    <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <!--FONT AWESOME-->
-    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
-</head>
+    <style>
+        :root { font-size: 62.5%; }
 
-<!-- <body onload=" atualizarFeed()"> -->
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            transition: 0.2s linear;
+            font-family: "Roboto", sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ── Header ── */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 99;
+            background-color: rgb(172, 1, 1);
+            border-bottom: 3px solid white;
+            box-shadow: 0 0 20px black;
+        }
+
+        .header section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+        }
+
+        .header img { width: 75px; display: block; }
+
+        .navbar { display: flex; align-items: center; gap: 3rem; }
+
+        .navbar a {
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .navbar a:hover { color: black; }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -5px;
+            width: 0%; height: 2px;
+            background: black;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover::after { width: 100%; }
+
+        .btn-nav {
+            padding: 10px 22px;
+            border-radius: 12px;
+            border: 2px solid white;
+            background: linear-gradient(to right, rgb(170,0,0), rgb(70,0,0));
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255,0,0,0.5);
+        }
+
+        .btn-nav:hover {
+            background: white;
+            color: red;
+            border: 2px solid red;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+
+        /* ── Layout principal ── */
+        .janela {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 9rem;
+        }
+
+        /* ── Sidebar esquerda ── */
+        .header-left {
+            width: 22rem;
+            min-height: calc(100vh - 9rem);
+            background: rgb(15, 15, 15);
+            border-right: 2px solid rgb(40, 40, 40);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 3rem 0;
+            position: fixed;
+            top: 9rem;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-left h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid rgb(40,40,40);
+            margin-bottom: 1rem;
+        }
+
+        .header-left h1 span { color: red; }
+
+        .hello {
+            padding: 1rem 2rem 2rem;
+            border-bottom: 1px solid rgb(40,40,40);
+            margin-bottom: 1rem;
+        }
+
+        .hello h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: rgb(180,180,180);
+        }
+
+        .hello h3 span { color: red; font-weight: 700; }
+
+        .btn-nav-sidebar {
+            display: block;
+            padding: 1.4rem 2rem;
+            font-size: 1.4rem;
+            color: rgb(180,180,180);
+            font-weight: 500;
+            background: transparent;
+            border-left: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .btn-nav-sidebar:hover, .btn-nav-sidebar.ativo {
+            color: white;
+            background: rgb(25,25,25);
+            border-left: 3px solid red;
+        }
+
+        .btn-logout {
+            margin-top: auto;
+            display: block;
+            padding: 1.4rem 2rem;
+            font-size: 1.4rem;
+            color: rgb(180,180,180);
+            font-weight: 500;
+            background: transparent;
+            border-top: 1px solid rgb(40,40,40);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-logout:hover {
+            color: red;
+            background: rgb(25,25,25);
+        }
+
+        /* ── Área principal (dash) ── */
+        .dash {
+            margin-left: 22rem;
+            flex: 1;
+            padding: 4rem;
+        }
+
+        /* ── Título da página ── */
+        .page-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title span { color: red; }
+
+        .page-subtitle {
+            font-size: 1.5rem;
+            color: rgb(150,150,150);
+            margin-bottom: 4rem;
+        }
+
+        /* ── Cards de estatísticas ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: rgb(18,18,18);
+            border: 1px solid rgb(40,40,40);
+            border-top: 4px solid red;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(255,0,0,0.12);
+        }
+
+        .stat-card .label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(140,140,140);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .value {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: red;
+            line-height: 1;
+        }
+
+        .stat-card .unit {
+            font-size: 1.1rem;
+            color: rgb(100,100,100);
+            margin-top: 0.8rem;
+        }
+
+        /* ── Seções ── */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgb(40,40,40);
+        }
+
+        .section-title span { color: red; }
+
+        /* ── Botões de seleção de usuário ── */
+        .btns-dash {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-chart {
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            border: 1px solid rgb(60,60,60);
+            background: rgb(25,25,25);
+            color: rgb(180,180,180);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-chart:hover { border-color: red; color: white; }
+
+        .btn-chart.btn-red {
+            background: red;
+            border-color: red;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ── Gráfico individual ── */
+        .display-none { display: none; }
+        .display-block { display: block; }
+
+        .grafico-box {
+            background: rgb(18,18,18);
+            border: 1px solid rgb(40,40,40);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tituloGraficos {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .graph { position: relative; height: 320px; }
+
+        .label-captura {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: rgb(150,150,150);
+        }
+
+        /* ── Ranking ── */
+        .table-wrapper {
+            background: rgb(18,18,18);
+            border: 1px solid rgb(40,40,40);
+            border-radius: 12px;
+            overflow: auto;
+            margin-bottom: 4rem;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+
+        thead tr {
+            background: rgb(30,30,30);
+            border-bottom: 2px solid red;
+        }
+
+        thead th {
+            padding: 1.6rem;
+            text-align: left;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgb(140,140,140);
+            font-weight: 400;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgb(35,35,35);
+            transition: background 0.15s;
+        }
+
+        tbody tr:hover { background: rgb(25,25,25); }
+        tbody tr:last-child { border-bottom: none; }
+
+        tbody td { padding: 1.4rem 1.6rem; font-size: 1.4rem; color: white; }
+
+        .pos { font-size: 1.8rem; font-weight: 900; color: rgb(100,100,100); }
+        .pos.gold   { color: #ffd700; }
+        .pos.silver { color: #c0c0c0; }
+        .pos.bronze { color: #cd7f32; }
+
+        .pontos { font-size: 1.8rem; font-weight: 900; color: red; }
+
+        .sem-dados {
+            text-align: center;
+            padding: 4rem;
+            font-size: 1.5rem;
+            color: rgb(120,120,120);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: rgb(10,10,10);
+            border-top: 3px solid red;
+            padding: 3rem;
+            text-align: center;
+            margin-left: 22rem;
+        }
+
+        .footer h4 { font-size: 1.5rem; font-weight: normal; color: white; }
+        .footer span { color: red; font-weight: bold; }
+    </style>
+</head>
 
 <body>
 
+    <!-- Header fixo no topo -->
+    <header class="header">
+        <section>
+            <a href="../index.html" class="logo">
+                <img src="../assets/imgs/logo.png" alt="logo sp">
+            </a>
+            <nav class="navbar">
+                <a href="../quiz.html">Quiz</a>
+                <a href="../elenco.html">Elenco</a>
+                <a href="../historia.html">História</a>
+                <a href="../login.html" class="btn-nav">Login</a>
+                <a href="../cadastro.html" class="btn-nav">Cadastro</a>
+            </nav>
+        </section>
+    </header>
+
     <div class="janela">
+
+        <!-- Sidebar esquerda -->
         <div class="header-left">
-            <h1>AquaTech</h1>
+            <h1>SP<span>FC</span></h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
-                </a>
-            </div>
+            <a href="../quiz.html" class="btn-nav-sidebar">Quiz</a>
+            <a href="../elenco.html" class="btn-nav-sidebar">Elenco</a>
+            <a href="../historia.html" class="btn-nav-sidebar">História</a>
+            <a href="dashboard.html" class="btn-nav-sidebar ativo">Dashboard</a>
 
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
-            </div>
-
+            <span class="btn-logout" onclick="window.location='../login.html'">Sair</span>
         </div>
 
+        <!-- Conteúdo principal -->
         <div class="dash">
-            <div id="alerta">
+
+            <h1 class="page-title">DASH<span>BOARD</span></h1>
+            <p class="page-subtitle">Resultados e estatísticas do quiz — São Paulo FC</p>
+
+            <!-- Cards de estatísticas gerais -->
+            <div class="cards-grid" id="cards-estatisticas">
+                <div class="stat-card">
+                    <div class="label">Participantes</div>
+                    <div class="value" id="card-participantes">—</div>
+                    <div class="unit">usuários</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Respostas enviadas</div>
+                    <div class="value" id="card-respostas">—</div>
+                    <div class="unit">no total</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Total de acertos</div>
+                    <div class="value" id="card-acertos">—</div>
+                    <div class="unit">respostas corretas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Média geral</div>
+                    <div class="value" id="card-media">—</div>
+                    <div class="unit">pontos por partida</div>
+                </div>
             </div>
 
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            <!-- Gráficos gerais -->
+            <h2 class="section-title">GRÁ<span>FICOS GERAIS</span></h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
+                <div class="grafico-box">
+                    <h3 class="tituloGraficos">PONTUAÇÃO POR <span style="color:red">USUÁRIO</span></h3>
+                    <div class="graph">
+                        <canvas id="myChartCanvasPontuacao"></canvas>
+                    </div>
+                    <div class="label-captura">
+                        <p id="avisoPontuacao"></p>
+                    </div>
+                </div>
+                <div class="grafico-box">
+                    <h3 class="tituloGraficos">ACERTOS <span style="color:red">VS</span> ERROS</h3>
+                    <div class="graph">
+                        <canvas id="myChartCanvasAcertos"></canvas>
+                    </div>
+                    <div class="label-captura">
+                        <p id="avisoAcertos"></p>
+                    </div>
+                </div>
             </div>
-            <div id="graficos">
+
+            <!-- Ranking geral -->
+            <h2 class="section-title">RANKING DE <span>JOGADORES</span></h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Respostas</th>
+                            <th>Pontuação</th>
+                            <th>Média</th>
+                            <th>Última participação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-ranking"></tbody>
+                </table>
             </div>
+
         </div>
     </div>
 
+    <div class="footer">
+        <div class="container">
+            <h4>Desenvolvido por: <br><span>João Miguel Leite Sousa</span></h4>
+        </div>
+    </div>
 
 </body>
 
 </html>
 
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+    // Preenche nome do usuário logado na sidebar
+    document.getElementById('b_usuario').innerHTML = sessionStorage.NOME_USUARIO || 'visitante';
 
     let proximaAtualizacao;
 
-    window.onload = exibirAquariosDoUsuario();
-
-    function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
-        aquarios.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-            `
-
-            document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
-                    </div>
-                </div>
-            `
-
-            obterDadosGrafico(item.id)
-        });
-
-        if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
-        }
+    // Ao carregar a página, busca os dados do quiz no banco
+    window.onload = function() {
+        carregarEstatisticas();
+        obterDadosGrafico();
     }
 
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+    // ── Estatísticas gerais (cards) ──────────────────────────────────────────────
+    function carregarEstatisticas() {
+        fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(response) {
+            if (response.ok) {
+                response.json().then(function(dados) {
+                    var est = dados.estatisticas;
+                    var resultados = dados.resultados;
 
-    function exibirAquario(idAquario) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+                    // Preenche os cards
+                    document.getElementById('card-participantes').innerHTML = est.total_participantes ?? 0;
+                    document.getElementById('card-respostas').innerHTML     = est.total_respostas     ?? 0;
+                    document.getElementById('card-acertos').innerHTML       = est.total_acertos       ?? 0;
+                    document.getElementById('card-media').innerHTML         = Number(est.media_geral  ?? 0).toFixed(1);
 
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idAquario) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
-
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
+                    // Preenche a tabela de ranking
+                    var tbody = document.getElementById('tbody-ranking');
+                    if (!resultados || resultados.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" class="sem-dados">Nenhum resultado encontrado ainda.</td></tr>';
+                    } else {
+                        resultados.forEach(function(r, i) {
+                            var posClasse = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
+                            var data = r.ultima_participacao
+                                ? new Date(r.ultima_participacao).toLocaleDateString('pt-BR')
+                                : '—';
+                            tbody.innerHTML += '<tr>' +
+                                '<td><span class="pos ' + posClasse + '">' + (i+1) + 'º</span></td>' +
+                                '<td>' + r.nome + '</td>' +
+                                '<td>' + r.email + '</td>' +
+                                '<td>' + r.total_respostas + '</td>' +
+                                '<td><span class="pontos">' + r.pontuacao_total + '</span></td>' +
+                                '<td>' + r.media_pontuacao + '</td>' +
+                                '<td>' + data + '</td>' +
+                                '</tr>';
+                        });
+                    }
+                });
+            } else {
+                console.error('Erro ao buscar estatísticas');
             }
-        }
-
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idAquario}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
-
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
+        }).catch(function(error) {
+            console.error('Erro na requisição de estatísticas: ' + error.message);
+        });
     }
 
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
-
-        alterarTitulo(idAquario)
+    // ── obterDadosGrafico ────────────────────────────────────────────────────────
+    // Busca os dados gerais do quiz no banco e passa para plotarGrafico
+    function obterDadosGrafico() {
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(response) {
             if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+                response.json().then(function(resposta) {
+                    console.log('Dados recebidos: ' + JSON.stringify(resposta));
 
-                    plotarGrafico(resposta, idAquario);
-
+                    plotarGrafico(resposta);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
             }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+        }).catch(function(error) {
+            console.error('Erro na obtenção dos dados p/ gráfico: ' + error.message);
+        });
     }
 
-    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
-    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
-    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
+    // ── plotarGrafico ────────────────────────────────────────────────────────────
+    // Monta o gráfico de barras (pontuação por usuário) e rosca (acertos vs erros)
+    function plotarGrafico(resposta) {
 
         console.log('iniciando plotagem do gráfico...');
 
-        // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+        var resultados   = resposta.resultados;
+        var estatisticas = resposta.estatisticas;
 
-        // Criando estrutura para plotar gráfico - dados
-        let dados = {
+        // ── Barras: pontuação por usuário ────────────────────────────────────────
+        var labels      = [];
+        var dadosBarras = {
             labels: labels,
             datasets: [{
-                label: 'Umidade',
+                label: 'Pontuação total',
                 data: [],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
+                backgroundColor: 'rgba(220, 0, 0, 0.7)',
+                borderColor: 'rgb(220, 0, 0)',
+                borderWidth: 2,
+                borderRadius: 6
             }]
         };
 
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
+        console.log('----------------------------------------------');
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":');
+        console.log(resposta);
 
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
+        for (var i = 0; i < resultados.length; i++) {
+            var registro = resultados[i];
+            labels.push(registro.nome);
+            dadosBarras.datasets[0].data.push(registro.pontuacao_total);
         }
 
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
+        console.log('----------------------------------------------');
+        console.log('O gráfico será plotado com os respectivos valores:');
+        console.log('Labels:', labels);
+        console.log('Dados:', dadosBarras.datasets);
+        console.log('----------------------------------------------');
 
-        // Criando estrutura para plotar gráfico - config
-        const config = {
-            type: 'line',
-            data: dados,
+        var configBarras = {
+            type: 'bar',
+            data: dadosBarras,
+            options: {
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { ticks: { color: '#aaa', font: { size: 12 } }, grid: { color: '#222' } },
+                    y: { ticks: { color: '#aaa', font: { size: 12 } }, grid: { color: '#222' }, beginAtZero: true }
+                }
+            }
         };
 
-        // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
-            config
+        var myChartPontuacao = new Chart(
+            document.getElementById('myChartCanvasPontuacao'),
+            configBarras
         );
 
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+        // ── Rosca: acertos vs erros ──────────────────────────────────────────────
+        var totalAcertos = Number(estatisticas.total_acertos  || 0);
+        var totalErros   = Number(estatisticas.total_respostas || 0) - totalAcertos;
+
+        var dadosRosca = {
+            labels: ['Acertos', 'Erros'],
+            datasets: [{
+                data: [totalAcertos, totalErros],
+                backgroundColor: ['rgba(220, 0, 0, 0.8)', 'rgba(50, 50, 50, 0.9)'],
+                borderColor: ['rgb(220, 0, 0)', '#444'],
+                borderWidth: 2
+            }]
+        };
+
+        var configRosca = {
+            type: 'doughnut',
+            data: dadosRosca,
+            options: {
+                cutout: '65%',
+                plugins: {
+                    legend: { labels: { color: '#ccc', font: { size: 14 } } }
+                }
+            }
+        };
+
+        var myChartAcertos = new Chart(
+            document.getElementById('myChartCanvasAcertos'),
+            configRosca
+        );
+
+        setTimeout(function() { atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos); }, 30000);
     }
 
+    // ── atualizarGrafico ─────────────────────────────────────────────────────────
+    // Atualiza os dois gráficos a cada 30 segundos buscando novamente os dados do banco
+    function atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos) {
 
-    // Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
-    // buscando a última medida inserida em tabela contendo as capturas, 
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idAquario, dados, myChart) {
-
-
-
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(response) {
             if (response.ok) {
-                response.json().then(function (novoRegistro) {
+                response.json().then(function(novosDados) {
 
-                    obterdados(idAquario);
-                    // alertar(novoRegistro, idAquario);
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log(`Dados atuais do gráfico:`);
-                    console.log(dados);
+                    var avisoCaptura = document.getElementById('avisoPontuacao');
+                    avisoCaptura.innerHTML = '';
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
-                    avisoCaptura.innerHTML = ""
+                    console.log('Dados recebidos: ' + JSON.stringify(novosDados));
+                    console.log('Dados atuais do gráfico:');
+                    console.log(dadosBarras);
 
+                    var resultados   = novosDados.resultados;
+                    var estatisticas = novosDados.estatisticas;
 
-                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length - 1]) {
-                        console.log("---------------------------------------------------------------")
-                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-                        avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-                        console.log("Horário do novo dado capturado:")
-                        console.log(novoRegistro[0].momento_grafico)
-                        console.log("Horário do último dado capturado:")
-                        console.log(dados.labels[dados.labels.length - 1])
-                        console.log("---------------------------------------------------------------")
+                    // Verifica se chegaram novos usuários
+                    if (resultados.length === dadosBarras.datasets[0].data.length) {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+                        avisoCaptura.innerHTML = 'Sem novos dados. O gráfico não atualizará.';
+                        console.log('---------------------------------------------------------------');
                     } else {
-                        // tirando e colocando valores no gráfico
-                        dados.labels.shift(); // apagar o primeiro
-                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+                        // Atualiza barras
+                        dadosBarras.labels = [];
+                        dadosBarras.datasets[0].data = [];
+                        for (var i = 0; i < resultados.length; i++) {
+                            dadosBarras.labels.push(resultados[i].nome);
+                            dadosBarras.datasets[0].data.push(resultados[i].pontuacao_total);
+                        }
+                        myChartPontuacao.update();
 
-                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
-                        dados.datasets[0].data.push(novoRegistro[0].umidade); // incluir uma nova medida de umidade
-
-                        dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
-                        dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
-
-                        myChart.update();
+                        // Atualiza rosca
+                        var totalAcertos = Number(estatisticas.total_acertos  || 0);
+                        var totalErros   = Number(estatisticas.total_respostas || 0) - totalAcertos;
+                        dadosRosca.datasets[0].data = [totalAcertos, totalErros];
+                        myChartAcertos.update();
                     }
 
-                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                    proximaAtualizacao = setTimeout(function() {
+                        atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos);
+                    }, 30000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                proximaAtualizacao = setTimeout(function() {
+                    atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos);
+                }, 30000);
             }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
+        }).catch(function(error) {
+            console.error('Erro na obtenção dos dados p/ gráfico: ' + error.message);
+        });
     }
 </script>

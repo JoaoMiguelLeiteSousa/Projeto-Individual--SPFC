@@ -1,428 +1,359 @@
-/* pagina mural */
-
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.label-captura {
-  display: flex;
-  justify-content: center;
-}
-
-.dash-right .avisos {
-  width: 100%;
-  color: rgb(216, 216, 216);
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.dash-right .avisos .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.dash-right .avisos .container .div-form {
-  width: 95%;
-}
-
-.dash-right .avisos .container .div-form #form_postagem {
-  width: 95%;
-}
-
-.dash-right .avisos .div-form label {
-  width: 95%;
-}
-
-.dash-right .avisos .div-form input {
-  width: 95%;
-  border-radius: 5px;
-}
-
-.dash-right .avisos .div-form textarea {
-  width: 95%;
-  border: 3px solid #e6005a;
-  background-color: white;
-  border-radius: 5px;
-}
-
-.dash-right .avisos .div-form button {
-  cursor: pointer;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 0;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 15px;
-  color: white;
-  background-color: #e6005a;
-  width: 120px;
-}
-
-.publicacao-btn-editar {
-  cursor: pointer;
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 0;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 14px;
-  padding: 5px 8px;
-  color: white;
-  background-color: #e6005a;
-  width: 80px;
-}
-
-.publicacao {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: stretch;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
-  border-bottom: 3px solid #e6005a;
-  padding: 20px;
-}
-
-.publicacao>*:not(:last-child) {
-  padding: 0 0 10px 0;
-}
-
-.div-results {
-  width: 100%;
-}
-
-.div-results .feed-container {
-  background-color: #212124;
-  border-radius: 5px;
-  margin-bottom: 80px;
-}
-
-.div-buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.div-buttons>* {
-  margin-left: 30px;
-}
-
-/* pagina graficos */
-
-.dash-header {
-  background-color: #212124;
-}
-
-.dash {
-  width: 80%;
-  position: relative;
-  top: 0;
-  left: 20%;
-  background-color: #161618;
-  height: 100vh;
-  overflow: auto;
-}
-
-.area-parametros-alerta {
-  /* border: 2px solid pink; */
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  margin: auto;
-  margin-top: 10px;
-  background-color: #212124;
-}
-
-.area-parametros-alerta .titulo-legenda {
-  color: white;
-  font-weight: 600;
-  width: fit-content;
-  margin: 10px 20px;
-}
-
-.parametros-alerta {
-  display: flex;
-  width: 100%;
-}
-
-.item-regua {
-  width: 20%;
-  text-align: center;
-  height: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-self: center;
-}
-
-.item-regua p {
-  margin: 0;
-  font-weight: 500;
-}
-
-.item-regua p:nth-child(2) {
-  font-weight: 800;
-}
-
-.perigo-frio {
-  background-color: #5c6bc0;
-}
-
-.perigo-quente {
-  background-color: #ff7043;
-}
-
-.alerta-frio {
-  background-color: #42a5f5;
-}
-
-.alerta-quente {
-  background-color: #ffee58;
-}
-
-.ideal {
-  background-color: #9ccc65;
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 450px;
-  width: 100%;
-  align-items: center;
-  color: white;
-}
-
-.card-aquario {
-  margin: 2%;
-  min-width: 40%;
-  max-width: 50%;
-  width: fit-content;
-  flex-wrap: wrap;
-  display: flex;
-  /* text-align: center; */
-  height: 180px;
-  /* justify-content: right; */
-  background-color: #212124;
-  font-size: 20px;
-}
-
-.card-aquario h1 {
-  width: fit-content;
-}
-
-.card-aquario p {
-  margin: 0;
-  font-size: 50px;
-  font-weight: lighter;
-  text-align: left;
-}
-
-.desc-aquario {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-}
-
-.desc-aquario .cor-alerta {
-  width: 30px;
-}
-
-.title-aquario {
-  width: 100%;
-}
-
-
-.cards h1 {
-  font-size: 22px;
-  border-bottom: solid white 1px;
-  text-align: left;
-  font-weight: lighter;
-  margin: 20px;
-}
-
-.temperatura,
-.umidade {
-  margin: 5px;
-  margin-left: 20px;
-  width: 75%;
-}
-
-.cor-alerta {
-  width: 13%;
-  height: 30%;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.btns-dash {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-  flex-wrap: wrap;
-  padding: 0 30% 0 30%;
-}
-
-.graph {
-  width: 70%;
-  margin: auto;
-  padding-top: 10px;
-}
-
-.tituloGraficos {
-  color: rgb(216, 216, 216);
-  display: flex;
-  justify-content: center;
-}
-
-.btn-chart {
-  font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 0;
-  font-weight: 600;
-  font-size: 18px;
-  padding: 10px 15px;
-  color: #e6005a;
-  background-color: white;
-  margin: 5px;
-  border-radius: 3px;
-  cursor: pointer
-}
-
-.btn-pink {
-  color: white;
-  background-color: #e6005a;
-}
-
-.btn-white {
-  color: #e6005a;
-  background-color: white;
-
-}
-
-.label-captura {
-  height: 80px;
-}
-
-.display-none {
-  display: none;
-}
-
-.display-flex {
-  display: flex;
-}
-
-.display-block {
-  display: block;
-}
-
-canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-
-/* PAGINA DOS GRÁFICOS 2023 */
-
-.janela {
-  display: flex;
-  /* width: 100vw; */
-}
-
-.header-left a {
-  text-decoration: none;
-  color: white;
-}
-
-.header-left {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  height: 100vh;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  border-right: 3px solid #32b9cd;
-  background-color: #212124;
-}
-
-.dash-right {
-  display: flex;
-  width: 70%;
-  height: fit-content;
-  background-color: #161618;
-  position: relative;
-  top: 0;
-  left: 25%;
-  height: 100vh;
-  overflow: auto;
-}
-
-.header-left h1 {
-  color: #32b9cd;
-}
-
-.hello {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.hello h3 {
-  color: #e3b062;
-  font-weight: 300;
-  font-size: 1.2rem;
-}
-
-.hello h3 span {
-  font-weight: 800;
-}
-
-.btn-nav {
-  width: 40%;
-  color: white;
-  background-color: #e6005a;
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
-}
-
-.btn-nav-white {
-  width: 40%;
-  background-color: white;
-  border: 3px solid #e6005a;
-  border-radius: 5px;
-  text-align: center;
-  padding: 2% 5%;
-}
-
-.btn-nav-white h3 {
-  color: #e6005a;
-  padding: 0;
-  margin: 0;
-}
-
-.btn-nav h3,
-.btn-logout h3 {
-  margin: 0;
-  padding: 0;
-}
-
-.btn-logout {
-  margin: 0;
-  padding: 0;
-  width: 20%;
-  background-color: #32b9cd;
-  color: white;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 15px;
-  margin-bottom: 100px;
-  cursor: pointer;
-}
+:root { font-size: 62.5%; }
+
+        * {
+            margin: 0; padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            transition: 0.2s linear;
+            font-family: "Roboto", sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: black;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ── Header ── */
+        .header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 99;
+            background-color: rgb(172, 1, 1);
+            border-bottom: 3px solid white;
+            box-shadow: 0 0 20px black;
+        }
+
+        .header section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 5%;
+        }
+
+        .header img { width: 75px; display: block; }
+
+        .navbar { display: flex; align-items: center; gap: 3rem; }
+
+        .navbar a {
+            font-size: 1.2rem;
+            color: white;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .navbar a:hover { color: black; }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: -5px;
+            width: 0%; height: 2px;
+            background: black;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover::after { width: 100%; }
+
+        .btn-nav {
+            padding: 10px 22px;
+            border-radius: 12px;
+            border: 2px solid white;
+            background: linear-gradient(to right, rgb(170,0,0), rgb(70,0,0));
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(255,0,0,0.5);
+        }
+
+        .btn-nav:hover {
+            background: white;
+            color: red;
+            border: 2px solid red;
+            transform: scale(1.08);
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+
+        /* ── Layout principal ── */
+        .janela {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 9rem;
+        }
+
+        /* ── Sidebar esquerda ── */
+        .header-left {
+            width: 22rem;
+            min-height: calc(100vh - 9rem);
+            background: rgb(15, 15, 15);
+            border-right: 2px solid rgb(40, 40, 40);
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            padding: 3rem 0;
+            position: fixed;
+            top: 9rem;
+            left: 0;
+            bottom: 0;
+        }
+
+        .header-left h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid rgb(40,40,40);
+            margin-bottom: 1rem;
+        }
+
+        .header-left h1 span { color: red; }
+
+        .hello {
+            padding: 1rem 2rem 2rem;
+            border-bottom: 1px solid rgb(40,40,40);
+            margin-bottom: 1rem;
+        }
+
+        .hello h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: rgb(180,180,180);
+        }
+
+        .hello h3 span { color: red; font-weight: 700; }
+
+        .btn-nav-sidebar {
+            display: block;
+            padding: 1.4rem 2rem;
+            font-size: 1.4rem;
+            color: rgb(180,180,180);
+            font-weight: 500;
+            background: transparent;
+            border-left: 3px solid transparent;
+            transition: 0.2s;
+        }
+
+        .btn-nav-sidebar:hover, .btn-nav-sidebar.ativo {
+            color: white;
+            background: rgb(25,25,25);
+            border-left: 3px solid red;
+        }
+
+        .btn-logout {
+            margin-top: auto;
+            display: block;
+            padding: 1.4rem 2rem;
+            font-size: 1.4rem;
+            color: rgb(180,180,180);
+            font-weight: 500;
+            background: transparent;
+            border-top: 1px solid rgb(40,40,40);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-logout:hover {
+            color: red;
+            background: rgb(25,25,25);
+        }
+
+        /* ── Área principal (dash) ── */
+        .dash {
+            margin-left: 22rem;
+            flex: 1;
+            padding: 4rem;
+        }
+
+        /* ── Título da página ── */
+        .page-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-title span { color: red; }
+
+        .page-subtitle {
+            font-size: 1.5rem;
+            color: rgb(150,150,150);
+            margin-bottom: 4rem;
+        }
+
+        /* ── Cards de estatísticas ── */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: rgb(18,18,18);
+            border: 1px solid rgb(40,40,40);
+            border-top: 4px solid red;
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px rgba(255,0,0,0.12);
+        }
+
+        .stat-card .label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgb(140,140,140);
+            margin-bottom: 1rem;
+        }
+
+        .stat-card .value {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: red;
+            line-height: 1;
+        }
+
+        .stat-card .unit {
+            font-size: 1.1rem;
+            color: rgb(100,100,100);
+            margin-top: 0.8rem;
+        }
+
+        /* ── Seções ── */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgb(40,40,40);
+        }
+
+        .section-title span { color: red; }
+
+        /* ── Botões de seleção de usuário ── */
+        .btns-dash {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-chart {
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            border: 1px solid rgb(60,60,60);
+            background: rgb(25,25,25);
+            color: rgb(180,180,180);
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-chart:hover { border-color: red; color: white; }
+
+        .btn-chart.btn-red {
+            background: red;
+            border-color: red;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* ── Gráfico individual ── */
+        .display-none { display: none; }
+        .display-block { display: block; }
+
+        .grafico-box {
+            background: rgb(18,18,18);
+            border: 1px solid rgb(40,40,40);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tituloGraficos {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .graph { position: relative; height: 320px; }
+
+        .label-captura {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: rgb(150,150,150);
+        }
+
+        /* ── Ranking ── */
+        .table-wrapper {
+            background: rgb(18,18,18);
+            border: 1px solid rgb(40,40,40);
+            border-radius: 12px;
+            overflow: auto;
+            margin-bottom: 4rem;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+
+        thead tr {
+            background: rgb(30,30,30);
+            border-bottom: 2px solid red;
+        }
+
+        thead th {
+            padding: 1.6rem;
+            text-align: left;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgb(140,140,140);
+            font-weight: 400;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgb(35,35,35);
+            transition: background 0.15s;
+        }
+
+        tbody tr:hover { background: rgb(25,25,25); }
+        tbody tr:last-child { border-bottom: none; }
+
+        tbody td { padding: 1.4rem 1.6rem; font-size: 1.4rem; color: white; }
+
+        .pos { font-size: 1.8rem; font-weight: 900; color: rgb(100,100,100); }
+        .pos.gold   { color: #ffd700; }
+        .pos.silver { color: #c0c0c0; }
+        .pos.bronze { color: #cd7f32; }
+
+        .pontos { font-size: 1.8rem; font-weight: 900; color: red; }
+
+        .sem-dados {
+            text-align: center;
+            padding: 4rem;
+            font-size: 1.5rem;
+            color: rgb(120,120,120);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: rgb(10,10,10);
+            border-top: 3px solid red;
+            padding: 3rem;
+            text-align: center;
+            margin-left: 22rem;
+        }
+
+        .footer h4 { font-size: 1.5rem; font-weight: normal; color: white; }
+        .footer span { color: red; font-weight: bold; }

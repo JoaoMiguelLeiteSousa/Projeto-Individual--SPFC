@@ -28,10 +28,14 @@ CREATE TABLE usuario_resposta (
         REFERENCES resposta_quiz(id_resposta)
 );
 
-CREATE TABLE elenco (
-    id_jogador INT PRIMARY KEY AUTO_INCREMENT,
-    nome_jogador VARCHAR(100) NOT NULL,
-    posicao VARCHAR(50),
-    numero_camisa INT,
-    nacionalidade VARCHAR(50)
-    );
+CREATE VIEW vw_respostas as 
+SELECT
+    u.nome,
+    rq.pergunta,
+    rq.resposta_usuario,
+    rq.pontuacao
+FROM usuario u
+JOIN usuario_resposta ur
+    ON u.id_usuario = ur.id_usuario
+JOIN resposta_quiz rq
+    ON ur.id_resposta = rq.id_resposta;

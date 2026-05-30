@@ -216,15 +216,23 @@ body {
 }
 
 /* Erro */
+.alerta_erro {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 999;
+    width: 280px;
+}
+
 .card_erro {
     display: none;
     background-color: rgba(255, 0, 0, 0.2);
     border: 2px solid red;
     color: white;
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 20px;
+    padding: 10px 14px;
+    border-radius: 8px;
     text-align: center;
+    font-size: 1.3rem;
 }
 
 /* footer */

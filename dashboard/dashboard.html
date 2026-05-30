@@ -14,12 +14,10 @@
     <link rel="stylesheet" href="../css/dashboards.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body>
 
-    <!-- Header fixo no topo -->
     <header class="header">
         <section>
             <a href="../index.html" class="logo">
@@ -29,100 +27,82 @@
                 <a href="../quiz.html">Quiz</a>
                 <a href="../elenco.html">Elenco</a>
                 <a href="../historia.html">História</a>
-                <a href="../login.html" class="btn-nav">Login</a>
-                <a href="../cadastro.html" class="btn-nav">Cadastro</a>
+                <a href="../login.html" class="btn-nav" id="nav-login">Login</a>
+                <a href="../cadastro.html" class="btn-nav" id="nav-cadastro">Cadastro</a>
+                <a href="#" class="btn-nav" id="nav-sair" onclick="sair()">Sair</a>
             </nav>
         </section>
     </header>
 
     <div class="janela">
 
-        <!-- Sidebar esquerda -->
         <div class="header-left">
             <h1>SP<span>FC</span></h1>
-
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
-
-            <a href="../quiz.html" class="btn-nav-sidebar">Quiz</a>
+            <a href="../quiz.html" class="btn-nav-sidebar">Fazer Quiz</a>
             <a href="../elenco.html" class="btn-nav-sidebar">Elenco</a>
             <a href="../historia.html" class="btn-nav-sidebar">História</a>
             <a href="dashboard.html" class="btn-nav-sidebar ativo">Dashboard</a>
-
-            <span class="btn-logout" onclick="window.location='../login.html'">Sair</span>
+            <span class="btn-logout" onclick="sair()">Sair</span>
         </div>
 
-        <!-- Conteúdo principal -->
         <div class="dash">
 
-            <h1 class="page-title">DASH<span>BOARD</span></h1>
-            <p class="page-subtitle">Resultados e estatísticas do quiz — São Paulo FC</p>
+            <h1 class="page-title">MEU <span>DESEMPENHO</span></h1>
+            <p class="page-subtitle">Veja como você foi no quiz — São Paulo FC</p>
 
-            <!-- Cards de estatísticas gerais -->
-            <div class="cards-grid" id="cards-estatisticas">
+            <!-- Cards -->
+            <div class="cards-grid">
                 <div class="stat-card">
-                    <div class="label">Participantes</div>
-                    <div class="value" id="card-participantes">—</div>
-                    <div class="unit">usuários</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Respostas enviadas</div>
-                    <div class="value" id="card-respostas">—</div>
-                    <div class="unit">no total</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Total de acertos</div>
+                    <div class="label">Meus acertos</div>
                     <div class="value" id="card-acertos">—</div>
                     <div class="unit">respostas corretas</div>
                 </div>
                 <div class="stat-card">
+                    <div class="label">Meus erros</div>
+                    <div class="value" id="card-erros">—</div>
+                    <div class="unit">respostas erradas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Meu aproveitamento</div>
+                    <div class="value" id="card-aproveitamento">—</div>
+                    <div class="unit">% de acerto</div>
+                </div>
+                <div class="stat-card">
                     <div class="label">Média geral</div>
-                    <div class="value" id="card-media">—</div>
-                    <div class="unit">pontos por partida</div>
+                    <div class="value" id="card-media-geral">—</div>
+                    <div class="unit">média de todos</div>
                 </div>
             </div>
 
-            <!-- Gráficos gerais -->
-            <h2 class="section-title">GRÁ<span>FICOS GERAIS</span></h2>
+            <!-- Dois gráficos lado a lado -->
+            <h2 class="section-title">MEUS <span>GRÁFICOS</span></h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
-                <div class="grafico-box">
-                    <h3 class="tituloGraficos">PONTUAÇÃO POR <span style="color:red">USUÁRIO</span></h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvasPontuacao"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoPontuacao"></p>
-                    </div>
-                </div>
+
+                <!-- Gráfico 1: rosca acertos vs erros -->
                 <div class="grafico-box">
                     <h3 class="tituloGraficos">ACERTOS <span style="color:red">VS</span> ERROS</h3>
                     <div class="graph">
-                        <canvas id="myChartCanvasAcertos"></canvas>
+                        <canvas id="myChartCanvas"></canvas>
                     </div>
                     <div class="label-captura">
-                        <p id="avisoAcertos"></p>
+                        <p id="avisoGrafico"></p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Ranking geral -->
-            <h2 class="section-title">RANKING DE <span>JOGADORES</span></h2>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Respostas</th>
-                            <th>Pontuação</th>
-                            <th>Média</th>
-                            <th>Última participação</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody-ranking"></tbody>
-                </table>
+                <!-- Gráfico 2: acerto/erro por questão -->
+                <div class="grafico-box">
+                    <h3 class="tituloGraficos">RESULTADO POR <span style="color:red">QUESTÃO</span></h3>
+                    <div class="graph">
+                        <canvas id="myChartCanvas2"></canvas>
+                    </div>
+                    <div class="label-captura">
+                        <p id="avisoGrafico2"></p>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -135,82 +115,57 @@
     </div>
 
 </body>
-
 </html>
 
 <script>
-    // Preenche nome do usuário logado na sidebar
-    document.getElementById('b_usuario').innerHTML = sessionStorage.NOME_USUARIO || 'visitante';
+    // ── Verificação de login ──────────────────────────────────────────────────────
+    var ID_USUARIO = sessionStorage.getItem('ID_USUARIO');
+
+    if (!ID_USUARIO) {
+        alert('Você precisa estar logado para acessar a dashboard!');
+        window.location = '../login.html';
+    }
+
+    document.getElementById('nav-login').style.display    = 'none';
+    document.getElementById('nav-cadastro').style.display = 'none';
+    document.getElementById('nav-sair').style.display     = 'inline-block';
+
+    function sair() {
+        sessionStorage.clear();
+        window.location = '../login.html';
+    }
+
+    document.getElementById('b_usuario').innerHTML = sessionStorage.getItem('NOME_USUARIO') || 'usuário';
 
     let proximaAtualizacao;
 
-    // Ao carregar a página, busca os dados do quiz no banco
     window.onload = function() {
-        carregarEstatisticas();
         obterDadosGrafico();
     }
 
-    // ── Estatísticas gerais (cards) ──────────────────────────────────────────────
-    function carregarEstatisticas() {
-        fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(response) {
-            if (response.ok) {
-                response.json().then(function(dados) {
-                    var est = dados.estatisticas;
-                    var resultados = dados.resultados;
-
-                    // Preenche os cards
-                    document.getElementById('card-participantes').innerHTML = est.total_participantes ?? 0;
-                    document.getElementById('card-respostas').innerHTML     = est.total_respostas     ?? 0;
-                    document.getElementById('card-acertos').innerHTML       = est.total_acertos       ?? 0;
-                    document.getElementById('card-media').innerHTML         = Number(est.media_geral  ?? 0).toFixed(1);
-
-                    // Preenche a tabela de ranking
-                    var tbody = document.getElementById('tbody-ranking');
-                    if (!resultados || resultados.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="7" class="sem-dados">Nenhum resultado encontrado ainda.</td></tr>';
-                    } else {
-                        resultados.forEach(function(r, i) {
-                            var posClasse = i === 0 ? 'gold' : i === 1 ? 'silver' : i === 2 ? 'bronze' : '';
-                            var data = r.ultima_participacao
-                                ? new Date(r.ultima_participacao).toLocaleDateString('pt-BR')
-                                : '—';
-                            tbody.innerHTML += '<tr>' +
-                                '<td><span class="pos ' + posClasse + '">' + (i+1) + 'º</span></td>' +
-                                '<td>' + r.nome + '</td>' +
-                                '<td>' + r.email + '</td>' +
-                                '<td>' + r.total_respostas + '</td>' +
-                                '<td><span class="pontos">' + r.pontuacao_total + '</span></td>' +
-                                '<td>' + r.media_pontuacao + '</td>' +
-                                '<td>' + data + '</td>' +
-                                '</tr>';
-                        });
-                    }
-                });
-            } else {
-                console.error('Erro ao buscar estatísticas');
-            }
-        }).catch(function(error) {
-            console.error('Erro na requisição de estatísticas: ' + error.message);
-        });
-    }
-
     // ── obterDadosGrafico ────────────────────────────────────────────────────────
-    // Busca os dados gerais do quiz no banco e passa para plotarGrafico
+    // Busca o histórico do usuário logado no banco e passa para plotarGrafico
     function obterDadosGrafico() {
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(response) {
+        fetch('/quiz/historico/' + ID_USUARIO, { cache: 'no-store' }).then(function(response) {
             if (response.ok) {
                 response.json().then(function(resposta) {
                     console.log('Dados recebidos: ' + JSON.stringify(resposta));
 
-                    plotarGrafico(resposta);
+                    fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(r2) {
+                        r2.json().then(function(dadosGerais) {
+                            plotarGrafico(resposta, dadosGerais.estatisticas);
+                        });
+                    });
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
+                document.getElementById('avisoGrafico').innerHTML  = 'Nenhum dado encontrado. Faça o quiz primeiro!';
+                document.getElementById('avisoGrafico2').innerHTML = 'Nenhum dado encontrado. Faça o quiz primeiro!';
             }
         }).catch(function(error) {
             console.error('Erro na obtenção dos dados p/ gráfico: ' + error.message);
@@ -218,143 +173,214 @@
     }
 
     // ── plotarGrafico ────────────────────────────────────────────────────────────
-    // Monta o gráfico de barras (pontuação por usuário) e rosca (acertos vs erros)
-    function plotarGrafico(resposta) {
+    // Monta os dois gráficos com os dados do usuário
+    function plotarGrafico(historico, estatisticasGerais) {
 
         console.log('iniciando plotagem do gráfico...');
 
-        var resultados   = resposta.resultados;
-        var estatisticas = resposta.estatisticas;
+        if (!historico || historico.length === 0) {
+            document.getElementById('avisoGrafico').innerHTML  = 'Nenhuma resposta encontrada. Faça o quiz primeiro!';
+            document.getElementById('avisoGrafico2').innerHTML = 'Nenhuma resposta encontrada. Faça o quiz primeiro!';
+            document.getElementById('card-acertos').innerHTML        = 0;
+            document.getElementById('card-erros').innerHTML          = 0;
+            document.getElementById('card-aproveitamento').innerHTML = '0%';
+            document.getElementById('card-media-geral').innerHTML    = Number(estatisticasGerais.media_geral || 0).toFixed(1);
+            return;
+        }
 
-        // ── Barras: pontuação por usuário ────────────────────────────────────────
-        var labels      = [];
-        var dadosBarras = {
-            labels: labels,
+        // ── Calcula stats ────────────────────────────────────────────────────────
+        var totalAcertos   = historico.filter(function(r) { return r.pontuacao == 1; }).length;
+        var totalErros     = historico.filter(function(r) { return r.pontuacao == 0; }).length;
+        var aproveitamento = historico.length > 0 ? Math.round((totalAcertos / historico.length) * 100) : 0;
+        var mediaGeral     = Number(estatisticasGerais.media_geral || 0);
+
+        document.getElementById('card-acertos').innerHTML        = totalAcertos;
+        document.getElementById('card-erros').innerHTML          = totalErros;
+        document.getElementById('card-aproveitamento').innerHTML = aproveitamento + '%';
+        document.getElementById('card-media-geral').innerHTML    = mediaGeral.toFixed(1);
+
+        console.log('----------------------------------------------');
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":');
+        console.log(historico);
+        console.log('Acertos:', totalAcertos, '| Erros:', totalErros);
+
+        // ── Gráfico 1: rosca acertos vs erros ────────────────────────────────────
+        var porcentagemAcertos = aproveitamento;
+
+        var dados = {
+            labels: ['Acertos', 'Erros'],
             datasets: [{
-                label: 'Pontuação total',
-                data: [],
-                backgroundColor: 'rgba(220, 0, 0, 0.7)',
-                borderColor: 'rgb(220, 0, 0)',
+                data: [totalAcertos, totalErros],
+                backgroundColor: ['rgba(40,200,80,0.85)', 'rgba(220,0,0,0.85)'],
+                borderColor:     ['rgba(40,200,80,1)',    'rgba(220,0,0,1)'],
+                borderWidth: 3,
+                hoverOffset: 12
+            }]
+        };
+
+        console.log('----------------------------------------------');
+        console.log('O gráfico será plotado com os respectivos valores:');
+        console.log('Labels:', dados.labels);
+        console.log('Dados:', dados.datasets);
+        console.log('----------------------------------------------');
+
+        var myChart = new Chart(document.getElementById('myChartCanvas'), {
+            type: 'doughnut',
+            data: dados,
+            options: {
+                cutout: '60%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#ccc', font: { size: 15 }, padding: 20 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var total = context.dataset.data.reduce(function(a,b){return a+b;},0);
+                                var pct   = total > 0 ? Math.round((context.parsed / total) * 100) : 0;
+                                return context.label + ': ' + context.parsed + ' (' + pct + '%)';
+                            }
+                        }
+                    }
+                }
+            },
+            plugins: [{
+                id: 'centroTexto',
+                beforeDraw: function(chart) {
+                    var w = chart.width, h = chart.height, ctx = chart.ctx;
+                    ctx.restore();
+                    ctx.font = 'bold ' + (w / 7) + 'px Roboto';
+                    ctx.fillStyle = '#ffffff';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(porcentagemAcertos + '%', w / 2, h / 2 - 14);
+                    ctx.font = (w / 22) + 'px Roboto';
+                    ctx.fillStyle = '#aaaaaa';
+                    ctx.fillText('de acerto', w / 2, h / 2 + 20);
+                    ctx.save();
+                }
+            }]
+        });
+
+        // ── Gráfico 2: acerto/erro por questão (barras coloridas) ────────────────
+        var labelsQ  = [];
+        var valoresQ = [];
+        var coresQ   = [];
+
+        for (var i = 0; i < historico.length; i++) {
+            labelsQ.push('Q' + (i + 1));
+            valoresQ.push(historico[i].pontuacao);
+            coresQ.push(historico[i].pontuacao == 1
+                ? 'rgba(40,200,80,0.85)'
+                : 'rgba(220,0,0,0.85)'
+            );
+        }
+
+        var dados2 = {
+            labels: labelsQ,
+            datasets: [{
+                label: 'Resultado',
+                data: valoresQ,
+                backgroundColor: coresQ,
+                borderColor: coresQ,
                 borderWidth: 2,
                 borderRadius: 6
             }]
         };
 
-        console.log('----------------------------------------------');
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":');
-        console.log(resposta);
-
-        for (var i = 0; i < resultados.length; i++) {
-            var registro = resultados[i];
-            labels.push(registro.nome);
-            dadosBarras.datasets[0].data.push(registro.pontuacao_total);
-        }
-
-        console.log('----------------------------------------------');
-        console.log('O gráfico será plotado com os respectivos valores:');
-        console.log('Labels:', labels);
-        console.log('Dados:', dadosBarras.datasets);
-        console.log('----------------------------------------------');
-
-        var configBarras = {
+        var myChart2 = new Chart(document.getElementById('myChartCanvas2'), {
             type: 'bar',
-            data: dadosBarras,
+            data: dados2,
             options: {
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { ticks: { color: '#aaa', font: { size: 12 } }, grid: { color: '#222' } },
-                    y: { ticks: { color: '#aaa', font: { size: 12 } }, grid: { color: '#222' }, beginAtZero: true }
-                }
-            }
-        };
-
-        var myChartPontuacao = new Chart(
-            document.getElementById('myChartCanvasPontuacao'),
-            configBarras
-        );
-
-        // ── Rosca: acertos vs erros ──────────────────────────────────────────────
-        var totalAcertos = Number(estatisticas.total_acertos  || 0);
-        var totalErros   = Number(estatisticas.total_respostas || 0) - totalAcertos;
-
-        var dadosRosca = {
-            labels: ['Acertos', 'Erros'],
-            datasets: [{
-                data: [totalAcertos, totalErros],
-                backgroundColor: ['rgba(220, 0, 0, 0.8)', 'rgba(50, 50, 50, 0.9)'],
-                borderColor: ['rgb(220, 0, 0)', '#444'],
-                borderWidth: 2
-            }]
-        };
-
-        var configRosca = {
-            type: 'doughnut',
-            data: dadosRosca,
-            options: {
-                cutout: '65%',
                 plugins: {
-                    legend: { labels: { color: '#ccc', font: { size: 14 } } }
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var idx = context.dataIndex;
+                                return historico[idx].pontuacao == 1 ? '✔ Acertou!' : '✘ Errou';
+                            },
+                            afterLabel: function(context) {
+                                var idx = context.dataIndex;
+                                return 'Sua resposta: ' + historico[idx].resposta_usuario;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#aaa', font: { size: 13 } }, grid: { color: '#222' } },
+                    y: {
+                        min: 0, max: 1,
+                        ticks: {
+                            color: '#aaa',
+                            stepSize: 1,
+                            callback: function(val) { return val === 1 ? 'Acerto' : val === 0 ? 'Erro' : ''; }
+                        },
+                        grid: { color: '#222' }
+                    }
                 }
             }
-        };
+        });
 
-        var myChartAcertos = new Chart(
-            document.getElementById('myChartCanvasAcertos'),
-            configRosca
-        );
-
-        setTimeout(function() { atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos); }, 30000);
+        setTimeout(function() { atualizarGrafico(dados, myChart, dados2, myChart2); }, 30000);
     }
 
     // ── atualizarGrafico ─────────────────────────────────────────────────────────
-    // Atualiza os dois gráficos a cada 30 segundos buscando novamente os dados do banco
-    function atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos) {
+    // Atualiza os dois gráficos a cada 30 segundos
+    function atualizarGrafico(dados, myChart, dados2, myChart2) {
 
-        fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(response) {
+        fetch('/quiz/historico/' + ID_USUARIO, { cache: 'no-store' }).then(function(response) {
             if (response.ok) {
-                response.json().then(function(novosDados) {
+                response.json().then(function(novoHistorico) {
 
-                    var avisoCaptura = document.getElementById('avisoPontuacao');
-                    avisoCaptura.innerHTML = '';
+                    var avisoGrafico = document.getElementById('avisoGrafico');
+                    avisoGrafico.innerHTML = '';
 
-                    console.log('Dados recebidos: ' + JSON.stringify(novosDados));
+                    console.log('Dados recebidos: ' + JSON.stringify(novoHistorico));
                     console.log('Dados atuais do gráfico:');
-                    console.log(dadosBarras);
+                    console.log(dados);
 
-                    var resultados   = novosDados.resultados;
-                    var estatisticas = novosDados.estatisticas;
+                    var novosAcertos = novoHistorico.filter(function(r) { return r.pontuacao == 1; }).length;
+                    var novosErros   = novoHistorico.filter(function(r) { return r.pontuacao == 0; }).length;
 
-                    // Verifica se chegaram novos usuários
-                    if (resultados.length === dadosBarras.datasets[0].data.length) {
+                    if (novosAcertos === dados.datasets[0].data[0] && novosErros === dados.datasets[0].data[1]) {
                         console.log('---------------------------------------------------------------');
                         console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-                        avisoCaptura.innerHTML = 'Sem novos dados. O gráfico não atualizará.';
+                        avisoGrafico.innerHTML = 'Sem novas respostas. O gráfico não atualizará.';
                         console.log('---------------------------------------------------------------');
                     } else {
-                        // Atualiza barras
-                        dadosBarras.labels = [];
-                        dadosBarras.datasets[0].data = [];
-                        for (var i = 0; i < resultados.length; i++) {
-                            dadosBarras.labels.push(resultados[i].nome);
-                            dadosBarras.datasets[0].data.push(resultados[i].pontuacao_total);
-                        }
-                        myChartPontuacao.update();
-
                         // Atualiza rosca
-                        var totalAcertos = Number(estatisticas.total_acertos  || 0);
-                        var totalErros   = Number(estatisticas.total_respostas || 0) - totalAcertos;
-                        dadosRosca.datasets[0].data = [totalAcertos, totalErros];
-                        myChartAcertos.update();
+                        dados.datasets[0].data = [novosAcertos, novosErros];
+                        myChart.update();
+
+                        // Atualiza barras por questão
+                        var novosLabels  = [];
+                        var novosValores = [];
+                        var novasCores   = [];
+                        for (var i = 0; i < novoHistorico.length; i++) {
+                            novosLabels.push('Q' + (i + 1));
+                            novosValores.push(novoHistorico[i].pontuacao);
+                            novasCores.push(novoHistorico[i].pontuacao == 1
+                                ? 'rgba(40,200,80,0.85)'
+                                : 'rgba(220,0,0,0.85)'
+                            );
+                        }
+                        dados2.labels = novosLabels;
+                        dados2.datasets[0].data            = novosValores;
+                        dados2.datasets[0].backgroundColor = novasCores;
+                        dados2.datasets[0].borderColor     = novasCores;
+                        myChart2.update();
                     }
 
                     proximaAtualizacao = setTimeout(function() {
-                        atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos);
+                        atualizarGrafico(dados, myChart, dados2, myChart2);
                     }, 30000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 proximaAtualizacao = setTimeout(function() {
-                    atualizarGrafico(dadosBarras, myChartPontuacao, dadosRosca, myChartAcertos);
+                    atualizarGrafico(dados, myChart, dados2, myChart2);
                 }, 30000);
             }
         }).catch(function(error) {

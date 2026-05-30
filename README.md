@@ -91,57 +91,13 @@ São Paulo Futebol Clube é um dos clubes mais vitoriosos do Brasil e do mundo.
 * VS Code
 ---
 
-## 💻 Como Executar o Projeto
-
-### 1️⃣ Clonar o repositório
-
-```bash
-git clone https://github.com/seu-usuario/spfc-connect.git
-```
-
-### 2️⃣ Entrar na pasta
-
-```bash
-cd spfc-connect
-```
-
-### 3️⃣ Instalar dependências
-
-```bash
-npm install
-```
-
-### 4️⃣ Configurar o banco de dados
-
-Execute o arquivo:
-
-```sql
-script.sql
-```
-
-no MySQL Workbench.
-
-### 5️⃣ Iniciar o servidor
-
-```bash
-npm start
-```
-
-ou
-
-```bash
-npm run dev
-```
-
----
-
 ## 📸 Telas do Sistema
 
 ### Página Inicial
 
 * História do clube
-* Conquistas
-* Curiosidades
+* Inicio
+* Quiz
 
 ### Login e Cadastro
 
@@ -153,7 +109,7 @@ npm run dev
 
 ### Dashboard
 
-* Estatísticas e ranking
+* Estatísticas sobre o quiz
 
 ---
 

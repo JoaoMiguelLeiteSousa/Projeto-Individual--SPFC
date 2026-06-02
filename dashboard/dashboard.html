@@ -2,389 +2,448 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="icon" href="../assets/imgs/logo.png">
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>São Paulo FC | Dashboard</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>EasyServer</title>
     <link rel="stylesheet" href="../css/dashboards.css">
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
-    <header class="header">
-        <section>
-            <a href="../index.html" class="logo">
-                <img src="../assets/imgs/logo.png" alt="logo sp">
-            </a>
-            <nav class="navbar">
-                <a href="../quiz.html">Quiz</a>
-                <a href="../elenco.html">Elenco</a>
-                <a href="../historia.html">História</a>
-                <a href="../login.html" class="btn-nav" id="nav-login">Login</a>
-                <a href="../cadastro.html" class="btn-nav" id="nav-cadastro">Cadastro</a>
-                <a href="#" class="btn-nav" id="nav-sair" onclick="sair()">Sair</a>
-            </nav>
-        </section>
-    </header>
+    <div class="topo">
+        <h1>EasyServer</h1>
 
-    <div class="janela">
-
-        <div class="header-left">
-            <h1>SP<span>FC</span></h1>
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
-            </div>
-            <a href="../quiz.html" class="btn-nav-sidebar">Fazer Quiz</a>
-            <a href="../elenco.html" class="btn-nav-sidebar">Elenco</a>
-            <a href="../historia.html" class="btn-nav-sidebar">História</a>
-            <a href="dashboard.html" class="btn-nav-sidebar ativo">Dashboard</a>
-            <span class="btn-logout" onclick="sair()">Sair</span>
-        </div>
-
-        <div class="dash">
-
-            <h1 class="page-title">MEU <span>DESEMPENHO</span></h1>
-            <p class="page-subtitle">Veja como você foi no quiz — São Paulo FC</p>
-
-            <!-- Cards -->
-            <div class="cards-grid">
-                <div class="stat-card">
-                    <div class="label">Meus acertos</div>
-                    <div class="value" id="card-acertos">—</div>
-                    <div class="unit">respostas corretas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Meus erros</div>
-                    <div class="value" id="card-erros">—</div>
-                    <div class="unit">respostas erradas</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Meu aproveitamento</div>
-                    <div class="value" id="card-aproveitamento">—</div>
-                    <div class="unit">% de acerto</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Média geral</div>
-                    <div class="value" id="card-media-geral">—</div>
-                    <div class="unit">média de todos</div>
-                </div>
-            </div>
-
-            <!-- Dois gráficos lado a lado -->
-            <h2 class="section-title">MEUS <span>GRÁFICOS</span></h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 4rem;">
-
-                <!-- Gráfico 1: rosca acertos vs erros -->
-                <div class="grafico-box">
-                    <h3 class="tituloGraficos">ACERTOS <span style="color:red">VS</span> ERROS</h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoGrafico"></p>
-                    </div>
-                </div>
-
-                <!-- Gráfico 2: acerto/erro por questão -->
-                <div class="grafico-box">
-                    <h3 class="tituloGraficos">RESULTADO POR <span style="color:red">QUESTÃO</span></h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas2"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoGrafico2"></p>
-                    </div>
-                </div>
-
-            </div>
-
+        <div>
+            Sensor:
+            <select id="sensor">
+                <!-- Populado dinamicamente via API -->
+                <option value="">Carregando...</option>
+            </select>
         </div>
     </div>
 
-    <div class="footer">
-        <div class="container">
-            <h4>Desenvolvido por: <br><span>João Miguel Leite Sousa</span></h4>
-        </div>
-    </div>
 
+    <div class="container">
+
+        <!-- ESQUERDA -->
+        <div class="esquerda">
+
+            <div class="kpis">
+                <div class="card">
+                    <h3>Temperatura Atual</h3>
+                    <p id="tempAtual">--°C</p>
+                </div>
+                <div class="card">
+                    <h3>Umidade Atual</h3>
+                    <p id="umiAtual">--%</p>
+                </div>
+            </div>
+
+            <div class="linha">
+                <div class="graficoMenor">
+                    <canvas id="graficoTemp"></canvas>
+                </div>
+                <div class="graficoMenor">
+                    <canvas id="graficoUmidade"></canvas>
+                </div>
+            </div>
+
+            <div class="graficoGrande">
+                <canvas id="graficoPrincipal"></canvas>
+            </div>
+
+            <p class="aviso-captura" id="avisoCaptura"></p>
+
+        </div>
+
+
+        <!-- DIREITA -->
+        <div class="direita">
+
+            <div class="box-alerta">
+                <h2>Alertas</h2>
+                <p id="alertas">--</p>
+            </div>
+
+            <div class="box-tab-status">
+                <h2>Status dos Sensores</h2>
+
+                <div class="tabela">
+                    <div class="linha-topo">
+                        <div>Sensor</div>
+                        <div>Local</div>
+                        <div>Temp</div>
+                        <div>Umid</div>
+                        <div>Status</div>
+                    </div>
+
+                    <div id="tabelaCorpo">
+                        <!-- Linhas geradas dinamicamente -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </body>
 </html>
+    <script>
 
-<script>
-    // ── Verificação de login ──────────────────────────────────────────────────────
-    var ID_USUARIO = sessionStorage.getItem('ID_USUARIO');
+        var LIMITE_TEMP = 27;
+        var LIMITE_UMI  = 55;
+        
+        var INTERVALO_MS = 2000;
 
-    if (!ID_USUARIO) {
-        alert('Você precisa estar logado para acessar a dashboard!');
-        window.location = '../login.html';
-    }
+        /* Referência ao próximo timeout de atualização */
+        var proximaAtualizacao;
 
-    document.getElementById('nav-login').style.display    = 'none';
-    document.getElementById('nav-cadastro').style.display = 'none';
-    document.getElementById('nav-sair').style.display     = 'inline-block';
+        /* Estrutura que guarda instâncias dos gráficos por sensor */
+        var sensores = {};
 
-    function sair() {
-        sessionStorage.clear();
-        window.location = '../login.html';
-    }
+        /* Sensor selecionado atualmente */
+        var sensorAtivo = null;
 
-    document.getElementById('b_usuario').innerHTML = sessionStorage.getItem('NOME_USUARIO') || 'usuário';
+        /*
+         * ID da empresa logada.
+         * Ajuste conforme sua autenticação — ex: leia de um cookie,
+         * de sessionStorage, ou de um endpoint de sessão.
+         */
+        var ID_EMPRESA = 1;
 
-    let proximaAtualizacao;
-
-    window.onload = function() {
-        obterDadosGrafico();
-    }
-
-    // ── obterDadosGrafico ────────────────────────────────────────────────────────
-    // Busca o histórico do usuário logado no banco e passa para plotarGrafico
-    function obterDadosGrafico() {
-
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
-
-        fetch('/quiz/historico/' + ID_USUARIO, { cache: 'no-store' }).then(function(response) {
-            if (response.ok) {
-                response.json().then(function(resposta) {
-                    console.log('Dados recebidos: ' + JSON.stringify(resposta));
-
-                    fetch('/quiz/dashboard-data', { cache: 'no-store' }).then(function(r2) {
-                        r2.json().then(function(dadosGerais) {
-                            plotarGrafico(resposta, dadosGerais.estatisticas);
-                        });
-                    });
+        /* FUNÇÕES DE FETCH — consomem a API real  */
+        function fetchUltimas(idSensor) {
+            return fetch(`/dashboard/ultimas/${idSensor}`, { cache: 'no-store' })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('Erro HTTP ' + r.status);
+                    return r.json();
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                document.getElementById('avisoGrafico').innerHTML  = 'Nenhum dado encontrado. Faça o quiz primeiro!';
-                document.getElementById('avisoGrafico2').innerHTML = 'Nenhum dado encontrado. Faça o quiz primeiro!';
-            }
-        }).catch(function(error) {
-            console.error('Erro na obtenção dos dados p/ gráfico: ' + error.message);
-        });
-    }
-
-    // ── plotarGrafico ────────────────────────────────────────────────────────────
-    // Monta os dois gráficos com os dados do usuário
-    function plotarGrafico(historico, estatisticasGerais) {
-
-        console.log('iniciando plotagem do gráfico...');
-
-        if (!historico || historico.length === 0) {
-            document.getElementById('avisoGrafico').innerHTML  = 'Nenhuma resposta encontrada. Faça o quiz primeiro!';
-            document.getElementById('avisoGrafico2').innerHTML = 'Nenhuma resposta encontrada. Faça o quiz primeiro!';
-            document.getElementById('card-acertos').innerHTML        = 0;
-            document.getElementById('card-erros').innerHTML          = 0;
-            document.getElementById('card-aproveitamento').innerHTML = '0%';
-            document.getElementById('card-media-geral').innerHTML    = Number(estatisticasGerais.media_geral || 0).toFixed(1);
-            return;
         }
 
-        // ── Calcula stats ────────────────────────────────────────────────────────
-        var totalAcertos   = historico.filter(function(r) { return r.pontuacao == 1; }).length;
-        var totalErros     = historico.filter(function(r) { return r.pontuacao == 0; }).length;
-        var aproveitamento = historico.length > 0 ? Math.round((totalAcertos / historico.length) * 100) : 0;
-        var mediaGeral     = Number(estatisticasGerais.media_geral || 0);
+        function fetchTempoReal(idSensor) {
+            return fetch(`/dashboard/tempo-real/${idSensor}`, { cache: 'no-store' })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('Erro HTTP ' + r.status);
+                    return r.json();
+                });
+        }
 
-        document.getElementById('card-acertos').innerHTML        = totalAcertos;
-        document.getElementById('card-erros').innerHTML          = totalErros;
-        document.getElementById('card-aproveitamento').innerHTML = aproveitamento + '%';
-        document.getElementById('card-media-geral').innerHTML    = mediaGeral.toFixed(1);
+        function fetchStatusSensores(idEmpresa) {
+            return fetch(`/dashboard/status/${idEmpresa}`, { cache: 'no-store' })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('Erro HTTP ' + r.status);
+                    return r.json();
+                });
+        }
 
-        console.log('----------------------------------------------');
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":');
-        console.log(historico);
-        console.log('Acertos:', totalAcertos, '| Erros:', totalErros);
+        function fetchSensoresDaEmpresa(idEmpresa) {
+            return fetch(`/dashboard/sensores/${idEmpresa}`, { cache: 'no-store' })
+                .then(function(r) {
+                    if (!r.ok) throw new Error('Erro HTTP ' + r.status);
+                    return r.json();
+                });
+        }
 
-        // ── Gráfico 1: rosca acertos vs erros ────────────────────────────────────
-        var porcentagemAcertos = aproveitamento;
 
-        var dados = {
-            labels: ['Acertos', 'Erros'],
-            datasets: [{
-                data: [totalAcertos, totalErros],
-                backgroundColor: ['rgba(40,200,80,0.85)', 'rgba(220,0,0,0.85)'],
-                borderColor:     ['rgba(40,200,80,1)',    'rgba(220,0,0,1)'],
-                borderWidth: 3,
-                hoverOffset: 12
-            }]
-        };
+        /*  POPULAR SELECT DE SENSORES */
+        function popularSelectSensores() {
+            fetchSensoresDaEmpresa(ID_EMPRESA)
+                .then(function(lista) {
+                    var select = document.getElementById('sensor');
+                    select.innerHTML = '';
 
-        console.log('----------------------------------------------');
-        console.log('O gráfico será plotado com os respectivos valores:');
-        console.log('Labels:', dados.labels);
-        console.log('Dados:', dados.datasets);
-        console.log('----------------------------------------------');
-
-        var myChart = new Chart(document.getElementById('myChartCanvas'), {
-            type: 'doughnut',
-            data: dados,
-            options: {
-                cutout: '60%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { color: '#ccc', font: { size: 15 }, padding: 20 }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                var total = context.dataset.data.reduce(function(a,b){return a+b;},0);
-                                var pct   = total > 0 ? Math.round((context.parsed / total) * 100) : 0;
-                                return context.label + ': ' + context.parsed + ' (' + pct + '%)';
-                            }
-                        }
+                    if (!lista.length) {
+                        select.innerHTML = '<option value="">Nenhum sensor ativo</option>';
+                        return;
                     }
-                }
-            },
-            plugins: [{
-                id: 'centroTexto',
-                beforeDraw: function(chart) {
-                    var w = chart.width, h = chart.height, ctx = chart.ctx;
-                    ctx.restore();
-                    ctx.font = 'bold ' + (w / 7) + 'px Roboto';
-                    ctx.fillStyle = '#ffffff';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(porcentagemAcertos + '%', w / 2, h / 2 - 14);
-                    ctx.font = (w / 22) + 'px Roboto';
-                    ctx.fillStyle = '#aaaaaa';
-                    ctx.fillText('de acerto', w / 2, h / 2 + 20);
-                    ctx.save();
-                }
-            }]
-        });
 
-        // ── Gráfico 2: acerto/erro por questão (barras coloridas) ────────────────
-        var labelsQ  = [];
-        var valoresQ = [];
-        var coresQ   = [];
+                    lista.forEach(function(s) {
+                        var opt = document.createElement('option');
+                        opt.value       = s.idSensor;
+                        opt.textContent = 'Sensor ' + String(s.idSensor).padStart(2, '0') + ' - ' + s.local;
+                        select.appendChild(opt);
+                    });
 
-        for (var i = 0; i < historico.length; i++) {
-            labelsQ.push('Q' + (i + 1));
-            valoresQ.push(historico[i].pontuacao);
-            coresQ.push(historico[i].pontuacao == 1
-                ? 'rgba(40,200,80,0.85)'
-                : 'rgba(220,0,0,0.85)'
-            );
+                    /* Inicia com o primeiro sensor da lista */
+                    sensorAtivo = parseInt(lista[0].idSensor);
+                    obterDadosGrafico(sensorAtivo);
+                })
+                .catch(function(err) {
+                    console.error('Erro ao carregar sensores:', err);
+                    document.getElementById('sensor').innerHTML =
+                        '<option value="">Erro ao carregar</option>';
+                });
         }
 
-        var dados2 = {
-            labels: labelsQ,
-            datasets: [{
-                label: 'Resultado',
-                data: valoresQ,
-                backgroundColor: coresQ,
-                borderColor: coresQ,
-                borderWidth: 2,
-                borderRadius: 6
-            }]
-        };
+        function obterDadosGrafico(idSensor) {
 
-        var myChart2 = new Chart(document.getElementById('myChartCanvas2'), {
-            type: 'bar',
-            data: dados2,
-            options: {
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                var idx = context.dataIndex;
-                                return historico[idx].pontuacao == 1 ? '✔ Acertou!' : '✘ Errou';
+            if (proximaAtualizacao != undefined) {
+                clearTimeout(proximaAtualizacao);
+            }
+
+            fetchUltimas(idSensor)
+                .then(function(resposta) {
+                    console.log("Dados recebidos:", resposta);
+                    plotarGrafico(resposta, idSensor);
+                })
+                .catch(function(err) {
+                    console.error("Erro ao obter dados do gráfico:", err);
+                });
+
+            fetchStatusSensores(ID_EMPRESA)
+                .then(function(statusList) {
+                    renderizarTabela(statusList);
+                    atualizarKPIs(statusList, idSensor);
+                    contarAlertas(statusList);
+                })
+                .catch(function(err) {
+                    console.error("Erro ao obter status dos sensores:", err);
+                });
+        }
+
+
+        function plotarGrafico(resposta, idSensor) {
+
+            console.log("Plotando gráfico para sensor:", idSensor);
+
+            /* Destrói instâncias anteriores se existirem */
+            if (sensores[idSensor]) {
+                sensores[idSensor].principal.destroy();
+                sensores[idSensor].gTemp.destroy();
+                sensores[idSensor].gUmi.destroy();
+            }
+
+            var labels    = [];
+            var datasTemp = [];
+            var datasUmi  = [];
+
+            resposta.forEach(function(reg) {
+                labels.push(reg.momento_grafico);
+                datasTemp.push(reg.temperatura);
+                datasUmi.push(reg.umidade);
+            });
+
+            /* Dados compartilhados (referência) para janela deslizante */
+            var dadosCompartilhados = {
+                labels:    labels,
+                datasTemp: datasTemp,
+                datasUmi:  datasUmi
+            };
+
+            /* ------ GRÁFICO PRINCIPAL (barras + linhas de limite) ------ */
+            var principal = new Chart(
+                document.getElementById("graficoPrincipal"),
+                {
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                type: "bar",
+                                label: "Temperatura",
+                                data: datasTemp,
+                                backgroundColor: "red"
                             },
-                            afterLabel: function(context) {
-                                var idx = context.dataIndex;
-                                return 'Sua resposta: ' + historico[idx].resposta_usuario;
+                            {
+                                type: "bar",
+                                label: "Umidade",
+                                data: datasUmi,
+                                backgroundColor: "blue"
+                            },
+                            {
+                                type: "line",
+                                label: "Limite Temp",
+                                data: Array(labels.length).fill(LIMITE_TEMP),
+                                borderColor: "red",
+                                pointRadius: 0
+                            },
+                            {
+                                type: "line",
+                                label: "Limite Umidade",
+                                data: Array(labels.length).fill(LIMITE_UMI),
+                                borderColor: "blue",
+                                pointRadius: 0
                             }
-                        }
-                    }
-                },
-                scales: {
-                    x: { ticks: { color: '#aaa', font: { size: 13 } }, grid: { color: '#222' } },
-                    y: {
-                        min: 0, max: 1,
-                        ticks: {
-                            color: '#aaa',
-                            stepSize: 1,
-                            callback: function(val) { return val === 1 ? 'Acerto' : val === 0 ? 'Erro' : ''; }
-                        },
-                        grid: { color: '#222' }
+                        ]
                     }
                 }
-            }
-        });
+            );
 
-        setTimeout(function() { atualizarGrafico(dados, myChart, dados2, myChart2); }, 30000);
-    }
+            /* ------ GRÁFICO MENOR: TEMPERATURA ------ */
+            var gTemp = new Chart(
+                document.getElementById("graficoTemp"),
+                {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "Temperatura",
+                            data: datasTemp,
+                            borderColor: "red"
+                        }]
+                    }
+                }
+            );
 
-    // ── atualizarGrafico ─────────────────────────────────────────────────────────
-    // Atualiza os dois gráficos a cada 30 segundos
-    function atualizarGrafico(dados, myChart, dados2, myChart2) {
+            /* ------ GRÁFICO MENOR: UMIDADE ------ */
+            var gUmi = new Chart(
+                document.getElementById("graficoUmidade"),
+                {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: "Umidade",
+                            data: datasUmi,
+                            borderColor: "blue"
+                        }]
+                    }
+                }
+            );
 
-        fetch('/quiz/historico/' + ID_USUARIO, { cache: 'no-store' }).then(function(response) {
-            if (response.ok) {
-                response.json().then(function(novoHistorico) {
+            /* Salva referências */
+            sensores[idSensor] = {
+                principal: principal,
+                gTemp:     gTemp,
+                gUmi:      gUmi,
+                dados:     dadosCompartilhados
+            };
 
-                    var avisoGrafico = document.getElementById('avisoGrafico');
-                    avisoGrafico.innerHTML = '';
+            /* Inicia ciclo de atualização em tempo real */
+            proximaAtualizacao = setTimeout(function() {
+                atualizarGrafico(idSensor);
+            }, INTERVALO_MS);
+        }
 
-                    console.log('Dados recebidos: ' + JSON.stringify(novoHistorico));
-                    console.log('Dados atuais do gráfico:');
-                    console.log(dados);
 
-                    var novosAcertos = novoHistorico.filter(function(r) { return r.pontuacao == 1; }).length;
-                    var novosErros   = novoHistorico.filter(function(r) { return r.pontuacao == 0; }).length;
+        /*  ATUALIZAR GRÁFICO (janela deslizante) */
 
-                    if (novosAcertos === dados.datasets[0].data[0] && novosErros === dados.datasets[0].data[1]) {
-                        console.log('---------------------------------------------------------------');
-                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-                        avisoGrafico.innerHTML = 'Sem novas respostas. O gráfico não atualizará.';
-                        console.log('---------------------------------------------------------------');
+        function atualizarGrafico(idSensor) {
+
+            fetchTempoReal(idSensor)
+                .then(function(novoRegistro) {
+
+                    console.log("Dado tempo real recebido:", novoRegistro);
+
+                    var avisoCaptura = document.getElementById("avisoCaptura");
+                    var s = sensores[idSensor];
+
+                    if (!s) return;
+
+                    var dados       = s.dados;
+                    var ultimoLabel = dados.labels[dados.labels.length - 1];
+
+                    avisoCaptura.innerHTML = "";
+
+                    if (!novoRegistro.length || novoRegistro[0].momento_grafico === ultimoLabel) {
+                        avisoCaptura.innerHTML = "⚠ Aguardando nova captura do sensor...";
+                        console.log("Sem dados novos — gráfico não atualizado.");
                     } else {
-                        // Atualiza rosca
-                        dados.datasets[0].data = [novosAcertos, novosErros];
-                        myChart.update();
+                        /* Remove o primeiro ponto e insere o novo */
+                        dados.labels.shift();
+                        dados.labels.push(novoRegistro[0].momento_grafico);
 
-                        // Atualiza barras por questão
-                        var novosLabels  = [];
-                        var novosValores = [];
-                        var novasCores   = [];
-                        for (var i = 0; i < novoHistorico.length; i++) {
-                            novosLabels.push('Q' + (i + 1));
-                            novosValores.push(novoHistorico[i].pontuacao);
-                            novasCores.push(novoHistorico[i].pontuacao == 1
-                                ? 'rgba(40,200,80,0.85)'
-                                : 'rgba(220,0,0,0.85)'
-                            );
-                        }
-                        dados2.labels = novosLabels;
-                        dados2.datasets[0].data            = novosValores;
-                        dados2.datasets[0].backgroundColor = novasCores;
-                        dados2.datasets[0].borderColor     = novasCores;
-                        myChart2.update();
+                        dados.datasTemp.shift();
+                        dados.datasTemp.push(novoRegistro[0].temperatura);
+
+                        dados.datasUmi.shift();
+                        dados.datasUmi.push(novoRegistro[0].umidade);
+
+                        /* Atualiza datasets */
+                        s.principal.data.datasets[0].data = [...dados.datasTemp];
+                        s.principal.data.datasets[1].data = [...dados.datasUmi];
+                        s.gTemp.data.datasets[0].data     = [...dados.datasTemp];
+                        s.gUmi.data.datasets[0].data      = [...dados.datasUmi];
+
+                        /* Atualiza labels */
+                        s.principal.data.labels = [...dados.labels];
+                        s.gTemp.data.labels     = [...dados.labels];
+                        s.gUmi.data.labels      = [...dados.labels];
+
+                        s.principal.update();
+                        s.gTemp.update();
+                        s.gUmi.update();
+
+                        /* Atualiza KPIs */
+                        var ultima = novoRegistro[0];
+                        document.getElementById("tempAtual").innerHTML = ultima.temperatura + "°C";
+                        document.getElementById("umiAtual").innerHTML  = ultima.umidade + "%";
                     }
 
                     proximaAtualizacao = setTimeout(function() {
-                        atualizarGrafico(dados, myChart, dados2, myChart2);
-                    }, 30000);
+                        atualizarGrafico(idSensor);
+                    }, INTERVALO_MS);
+
+                })
+                .catch(function(err) {
+                    console.error("Erro ao buscar dado tempo real:", err);
+                    proximaAtualizacao = setTimeout(function() {
+                        atualizarGrafico(idSensor);
+                    }, INTERVALO_MS);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                proximaAtualizacao = setTimeout(function() {
-                    atualizarGrafico(dados, myChart, dados2, myChart2);
-                }, 30000);
+        }
+
+
+        /*  TABELA DE STATUS */
+        function calcularStatus(temp, umi) {
+            if (temp >= LIMITE_TEMP || umi >= LIMITE_UMI + 10) return { label: "Crítico",  cls: "critico" };
+            if (temp >= LIMITE_TEMP - 2 || umi >= LIMITE_UMI)    return { label: "Atenção",  cls: "atencao" };
+            return                                                       { label: "Normal",   cls: "normal"  };
+        }
+
+        function renderizarTabela(statusList) {
+            var corpo = document.getElementById("tabelaCorpo");
+            corpo.innerHTML = "";
+
+            statusList.forEach(function(s, i) {
+                var st = calcularStatus(s.temperatura, s.umidade);
+                corpo.innerHTML += `
+                    <div class="linha-status">
+                        <div>${s.nome}</div>
+                        <div>${s.local}</div>
+                        <div>${s.temperatura != null ? s.temperatura + '°C' : '--'}</div>
+                        <div>${s.umidade     != null ? s.umidade     + '%'  : '--'}</div>
+                        <div>
+                            <span class="${st.cls}" id="st${i+1}">${st.label}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function atualizarKPIs(statusList, idSensor) {
+            var ref = statusList.find(function(s, i) { return i === idSensor - 1; })
+                   || statusList[0];
+            if (!ref) return;
+            document.getElementById("tempAtual").innerHTML = (ref.temperatura != null ? ref.temperatura + '°C' : '--°C');
+            document.getElementById("umiAtual").innerHTML  = (ref.umidade     != null ? ref.umidade     + '%'  : '--%');
+        }
+
+        function contarAlertas(statusList) {
+            var count = statusList.filter(function(s) {
+                var st = calcularStatus(s.temperatura, s.umidade);
+                return st.cls === "critico" || st.cls === "atencao";
+            }).length;
+
+            var txt = count === 0 ? "Nenhum alerta ativo" :
+                      count === 1 ? "1 ativo" : count + " ativos";
+
+            document.getElementById("alertas").innerHTML = txt;
+        }
+    
+        document.getElementById("sensor").addEventListener("change", function() {
+            if (proximaAtualizacao != undefined) {
+                clearTimeout(proximaAtualizacao);
             }
-        }).catch(function(error) {
-            console.error('Erro na obtenção dos dados p/ gráfico: ' + error.message);
+            sensorAtivo = parseInt(this.value);
+            obterDadosGrafico(sensorAtivo);
         });
-    }
-</script>
+
+
+        window.onload = function() {
+            popularSelectSensores();
+        };
+
+    </script>

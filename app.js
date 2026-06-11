@@ -19,7 +19,7 @@ var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
 var aquariosRouter = require("./src/routes/aquarios");
 var empresasRouter = require("./src/routes/empresas");
-var resultadoRouter = require("./src/routes/resultados");
+//var resultadoRouter = require("./src/routes/resultados");
 var tentativaRouter = require('./src/routes/tentativa');
 
 app.use(express.json());

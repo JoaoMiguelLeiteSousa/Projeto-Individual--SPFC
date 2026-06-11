@@ -1,0 +1,310 @@
+:root {
+    font-size: 58%;
+    --red: rgb(172, 1, 1);
+    --dark-red: rgb(70, 0, 0);
+    --black: #000;
+    --card: rgb(18, 18, 18);
+    --card-2: rgb(25, 25, 25);
+    --white: #fff;
+    --gray: #bdbdbd;
+}
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    background: radial-gradient(circle at top, #1a1a1a, #000);
+    color: var(--white);
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: rgb(172, 1, 1);
+    border-bottom: 3px solid white;
+    box-shadow: 0 0 20px black;
+}
+
+.header section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5%;
+}
+
+/* Logo da header */
+.header img {
+    width: 75px;
+    display: block;
+}
+
+/* Navbar (Header) */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.navbar a {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: black;
+    transition: 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.btn-nav {
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: linear-gradient(to right, rgb(170, 0, 0), rgb(70, 0, 0));
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.btn-nav:hover {
+    background: white;
+    color: red;
+    border: 2px solid red;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+
+/* ================= CONTAINER GERAL ================= */
+#pontuacaoEJogo {
+    max-width: 850px;
+    margin: 12rem auto 4rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 2rem;
+}
+
+/* ================= BOTÃO INICIAR ================= */
+#btnIniciarQuiz {
+    padding: 2rem;
+    font-size: 1.8rem;
+    border-radius: 14px;
+    background: linear-gradient(to right, var(--red), var(--dark-red));
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+}
+
+#btnIniciarQuiz:hover {
+    background: white;
+    color: var(--red);
+    transform: scale(1.03);
+}
+
+/* ================= PAINEL PONTUAÇÃO ================= */
+#pontuacao {
+    background: linear-gradient(145deg, rgb(20, 20, 20), rgb(10, 10, 10));
+    border: 1px solid rgba(172, 1, 1, 0.4);
+    border-radius: 18px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+/* linha de stats */
+#pontuacaoDuranteJogo,
+#pontuacaoFinalJogo {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+/* cada bloco vira "cardzinho" */
+#pontuacao span {
+    font-size: 1.6rem;
+    color: #ddd;
+}
+
+/* números (destaque estilo placar) */
+#spanCertas,
+#spanErradas,
+#spanPontuacaoFinal {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 10px;
+    background: rgba(172, 1, 1, 0.25);
+    border: 1px solid rgba(172, 1, 1, 0.4);
+    margin-left: 0.5rem;
+}
+
+/* separador visual do final */
+#pontuacaoFinalJogo {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+}
+
+/* mensagem final destaque */
+#msgFinal {
+    font-size: 1.7rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* ================= CARD DO QUIZ ================= */
+#jogo {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 3rem;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* ================= PROGRESSO ================= */
+#infoQuestao {
+    font-size: 1.4rem;
+    color: var(--gray);
+}
+
+/* ================= PERGUNTA (DESTAQUE) ================= */
+#perguntaDaQuestaoAtual {
+    font-size: 2.6rem;
+    font-weight: 800;
+    line-height: 1.3;
+    padding: 1.5rem;
+    background: linear-gradient(to right, rgba(172,1,1,0.2), transparent);
+    border-left: 4px solid var(--red);
+    border-radius: 10px;
+}
+
+/* ================= OPÇÕES (AGORA CORRETO ABAIXO) ================= */
+#opcoes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* cada opção vira um “botão card” */
+#opcoes span {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--card-2);
+    padding: 1.6rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+#opcoes span:hover {
+    transform: translateX(5px);
+    border: 1px solid var(--red);
+    background: rgb(30, 30, 30);
+}
+
+/* radio */
+input[type="radio"] {
+    transform: scale(1.3);
+    accent-color: var(--red);
+}
+
+/* ================= BOTÕES ================= */
+#botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+button {
+    padding: 1.6rem;
+    font-size: 1.6rem;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* submeter */
+#btnSubmeter {
+    background: linear-gradient(to right, var(--red), var(--dark-red));
+    color: white;
+}
+
+#btnSubmeter:hover {
+    background: white;
+    color: var(--red);
+}
+
+/* próxima */
+#btnProx {
+    background: #1f1f1f;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* tentar novamente */
+#btnTentarNovamente {
+    background: transparent;
+    border: 1px solid var(--red);
+    color: white;
+}
+
+#btnTentarNovamente:hover {
+    background: var(--red);
+}
+
+/* ================= FEEDBACK ================= */
+.text-success-with-bg {
+    background: rgba(0, 255, 0, 0.15);
+    border: 1px solid lime;
+    padding: 0.6rem;
+    border-radius: 8px;
+}
+
+.text-danger-with-bg {
+    background: rgba(255, 0, 0, 0.15);
+    border: 1px solid red;
+    padding: 0.6rem;
+    border-radius: 8px;
+}
+
+/* ================= FINAL ================= */
+#msgFinal {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    line-height: 1.6;
+}

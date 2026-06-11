@@ -1,0 +1,350 @@
+:root {
+    font-size: 62.5%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    transition: 0.2s linear;
+    font-family: "Roboto", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body */
+body {
+    background-color: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: rgb(172, 1, 1);
+    border-bottom: 3px solid white;
+    box-shadow: 0 0 20px black;
+}
+
+.header section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5%;
+}
+
+/* Logo da header */
+.header img {
+    width: 75px;
+    display: block;
+}
+
+/* Navbar (Header) */
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.navbar a {
+    font-size: 1.2rem;
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+.navbar a:hover {
+    color: black;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: black;
+    transition: 0.3s;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.btn-nav {
+    padding: 10px 22px;
+    border-radius: 12px;
+    border: 2px solid white;
+    background: linear-gradient(to right, rgb(170, 0, 0), rgb(70, 0, 0));
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.btn-nav:hover {
+    background: white;
+    color: red;
+    border: 2px solid red;
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Botão */
+.btn {
+    background: linear-gradient(to right, red, darkred);
+    color: white;
+    padding: 1.3rem 3.5rem;
+    font-size: 1.7rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 2rem;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background: white;
+    color: red;
+}
+
+/* Section */
+
+section {
+    padding: 4rem 2rem;
+    margin: 0 auto;
+    max-width: 1300px;
+}
+
+/* Tela Home */
+
+.home-container {
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.65),
+        rgba(0, 0, 0, 0.75)),
+        url(../assets/imgs/img2.jpg);
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+}
+
+.home-container section {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.content {
+    max-width: 75rem;
+}
+
+.content h3 {
+    font-size: 7rem;
+    color: white;
+    line-height: 1.1;
+    text-shadow: 5px 5px 15px black;
+}
+
+.content span {
+    color: red;
+}
+
+.content p {
+    font-size: 2rem;
+    line-height: 1.8;
+    margin-top: 2rem;
+    color: rgb(230, 230, 230);
+    text-shadow: 3px 3px 10px black;
+}
+
+/* Titulos - escrito */
+
+.title {
+    text-align: center;
+    font-size: 5rem;
+    margin-bottom: 5rem;
+    text-transform: uppercase;
+}
+
+.title span {
+    color: red;
+}
+
+/* História */
+
+.history {
+    padding-top: 10rem;
+}
+
+.history .row {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    background: rgb(20, 20, 20);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.15);
+}
+
+.history .row .container-img {
+    width: 45%;
+    flex-shrink: 0;
+}
+
+.history .row .container-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.history .row .content {
+    padding: 3rem;
+}
+
+.history .row .content h3 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    color: red;
+}
+
+.history .row .content p {
+    font-size: 1.8rem;
+    line-height: 1.9;
+    color: rgb(220, 220, 220);
+}
+
+/* Títulos */
+.titulo {
+    padding-top: 10rem;
+}
+
+.titulo .box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+}
+
+.titulo .box-container .box {
+    background: rgb(18, 18, 18);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 5rem 3rem;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+}
+
+.titulo .box-container .box:hover {
+    transform: translateY(-10px);
+    border: 2px solid red;
+    background: linear-gradient(to bottom,
+            rgb(30, 30, 30),
+            rgb(10, 10, 10));
+}
+
+.titulo .box-container .box img {
+    height: 12rem;
+    margin-bottom: 2rem;
+}
+
+.titulo .box-container .box h3 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.titulo .box-container .box .qtd {
+    font-size: 3.5rem;
+    color: red;
+    font-weight: bold;
+}
+
+/* Galeria - Imagens */
+.galeria {
+    padding-top: 10rem;
+}
+
+.galeria .container-imagens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.galeria .container-imagens img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid transparent;
+    cursor: pointer;
+}
+
+.galeria .container-imagens img:hover {
+    transform: scale(1.03);
+    border: 3px solid red;
+}
+
+/* Frases */
+.frase {
+    margin-top: 10rem;
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)),
+        url(../assets/imgs/img4.jpg);
+
+    background-size: cover;
+    background-position: center;
+    padding: 10rem 2rem;
+    text-align: center;
+}
+
+.frase h2 {
+    font-size: 5rem;
+    color: white;
+    text-shadow: 5px 5px 10px black;
+}
+
+.frase span {
+    color: red;
+}
+
+.frase p {
+    margin-top: 2rem;
+    font-size: 2rem;
+    color: rgb(220, 220 , 220);
+}
+
+/* Footer */
+.footer {
+    background: rgb(10, 10, 10);
+    border-top: 3px solid red;
+    margin-top: 10rem;
+    padding: 3rem;
+    text-align: center;
+}
+
+.footer h4 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: white;
+}
+
+.footer span {
+    color: red;
+   font-weight: bold;
+}

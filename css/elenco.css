@@ -16,13 +16,13 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Body */
+/* body */
 body {
     background: black;
     color: white;
 }
 
-/* Header */
+/* header */
 .header {
     position: fixed;
     top: 0;
@@ -35,7 +35,7 @@ body {
     box-shadow: 0 0 20px black;
 }
 
-/* Conteúdo da header */
+/* conteudo da header */
 .header section {
     display: flex;
     align-items: center;
@@ -44,7 +44,7 @@ body {
     padding: 1rem 5%;
 }
 
-/* Logo da header */
+/* logo da barra de navegação */
 .header img {
     width: 75px;
     display: block;
@@ -65,12 +65,11 @@ body {
     position: relative;
 }
 
-/* Hover dos links */
 .navbar a:hover {
     color: black;
 }
 
-/* Linha animada */
+/* linha embaixo */
 .navbar a::after {
     content: "";
     position: absolute;
@@ -106,7 +105,6 @@ body {
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
-/* Hover botão */
 .btn-nav:hover {
     background: white;
     color: red;
@@ -118,21 +116,7 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-/* Botões */
-
-.btn-nav {
-    padding: 8px 18px;
-    border-radius: 12px;
-    border: 2px solid white;
-    background: linear-gradient(to right, rgb(170, 0, 0), rgb(70, 0, 0));
-}
-
-.btn-nav:hover {
-    background: white;
-    color: red;
-}
-
-/* Elenco */
+/* elenco */
 
 .elenco {
     padding-top: 10rem;
@@ -151,7 +135,7 @@ body {
     color: red;
 }
 
-/* Categoria - Posições */
+/* categoria posições */
 
 .categoria {
     font-size: 2.5rem;
@@ -163,7 +147,7 @@ body {
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
-/* Container jogadores */
+/* container jogadores */
 
 .container-jogadores {
     display: flex;
@@ -211,8 +195,6 @@ body {
     display: block;
 }
 
-/* Escurece a imagem */
-
 .card-jogador::after {
     content: "";
     position: absolute;
@@ -225,7 +207,7 @@ body {
     );
 }
 
-/* Texto em cima da imagem */
+/* texto em cima da imagem */
 
 .card-jogador .info {
     position: absolute;
@@ -253,7 +235,7 @@ body {
     font-size: 1.5rem;
 }
 
-/* Footer */
+/* final da pagina */
 
 .footer {
     background: rgb(10, 10, 10);

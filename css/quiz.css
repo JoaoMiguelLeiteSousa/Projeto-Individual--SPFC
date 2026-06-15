@@ -9,7 +9,6 @@
     --gray: #bdbdbd;
 }
 
-/* RESET */
 * {
     margin: 0;
     padding: 0;
@@ -101,7 +100,7 @@ body {
 }
 
 
-/* ================= CONTAINER GERAL ================= */
+/* pontuação e jogo */
 #pontuacaoEJogo {
     max-width: 850px;
     margin: 12rem auto 4rem auto;
@@ -111,7 +110,7 @@ body {
     padding: 0 2rem;
 }
 
-/* ================= BOTÃO INICIAR ================= */
+/* botão de iniciar */
 #btnIniciarQuiz {
     padding: 2rem;
     font-size: 1.8rem;
@@ -128,7 +127,7 @@ body {
     transform: scale(1.03);
 }
 
-/* ================= PAINEL PONTUAÇÃO ================= */
+/* painel da pontuação */
 #pontuacao {
     background: linear-gradient(145deg, rgb(20, 20, 20), rgb(10, 10, 10));
     border: 1px solid rgba(172, 1, 1, 0.4);
@@ -148,13 +147,13 @@ body {
     gap: 2rem;
 }
 
-/* cada bloco vira "cardzinho" */
+/* cada bloco vira cardzinho */
 #pontuacao span {
     font-size: 1.6rem;
     color: #ddd;
 }
 
-/* números (destaque estilo placar) */
+/* números */
 #spanCertas,
 #spanErradas,
 #spanPontuacaoFinal {
@@ -181,26 +180,25 @@ body {
     text-align: center;
 }
 
-/* ================= CARD DO QUIZ ================= */
+/* card do quiz */
 #jogo {
     background: var(--card);
     border-radius: 20px;
     padding: 3rem;
     border: 1px solid rgba(255, 0, 0, 0.2);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-/* ================= PROGRESSO ================= */
+/* info */
 #infoQuestao {
     font-size: 1.4rem;
     color: var(--gray);
 }
 
-/* ================= PERGUNTA (DESTAQUE) ================= */
+/* pergunta */
 #perguntaDaQuestaoAtual {
     font-size: 2.6rem;
     font-weight: 800;
@@ -211,7 +209,7 @@ body {
     border-radius: 10px;
 }
 
-/* ================= OPÇÕES (AGORA CORRETO ABAIXO) ================= */
+/* opções */
 #opcoes {
     display: flex;
     flex-direction: column;
@@ -219,7 +217,7 @@ body {
     margin-top: 1rem;
 }
 
-/* cada opção vira um “botão card” */
+/* cada opção vira um botão card */
 #opcoes span {
     display: flex;
     align-items: center;
@@ -244,7 +242,7 @@ input[type="radio"] {
     accent-color: var(--red);
 }
 
-/* ================= BOTÕES ================= */
+/* botões */
 #botoes {
     display: flex;
     flex-direction: column;
@@ -287,7 +285,7 @@ button {
     background: var(--red);
 }
 
-/* ================= FEEDBACK ================= */
+/* feedback */
 .text-success-with-bg {
     background: rgba(0, 255, 0, 0.15);
     border: 1px solid lime;
@@ -302,7 +300,7 @@ button {
     border-radius: 8px;
 }
 
-/* ================= FINAL ================= */
+/* final da pagina */
 #msgFinal {
     font-size: 1.8rem;
     margin-top: 1rem;

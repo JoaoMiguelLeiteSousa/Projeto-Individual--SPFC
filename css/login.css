@@ -45,7 +45,7 @@ body {
     box-shadow: 0 0 20px black;
 }
 
-/* Conteúdo da header */
+/* conteudo da header */
 .header section {
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@ body {
     padding: 1rem 5%;
 }
 
-/* Logo da header */
+/* Logo do header */
 .header img {
     width: 75px;
     display: block;
@@ -75,12 +75,11 @@ body {
     position: relative;
 }
 
-/* Hover dos links */
 .navbar a:hover {
     color: black;
 }
 
-/* Linha animada */
+/* Linha embaixo */
 .navbar a::after {
     content: "";
     position: absolute;
@@ -116,7 +115,6 @@ body {
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
-/* Hover botão */
 .btn-nav:hover {
     background: white;
     color: red;
@@ -128,7 +126,7 @@ body {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-/* Login */
+/* login */
 .login {
     display: flex;
     justify-content: center;
@@ -136,7 +134,7 @@ body {
     height: 100vh;
 }
 
-/* Card do Login */
+/* card do Login */
 .card-login {
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(5px);
@@ -155,7 +153,7 @@ body {
     color: white;
 }
 
-/* Formulario */
+/* formulario */
 .formulario {
     display: flex;
     flex-direction: column;
@@ -215,7 +213,7 @@ body {
     transform: scale(1.05);
 }
 
-/* Erro */
+/* erro */
 .alerta_erro {
     position: fixed;
     top: 100px;
@@ -235,7 +233,7 @@ body {
     font-size: 1.3rem;
 }
 
-/* footer */
+/* final da pagina */
 .footer {
     background: rgb(10, 10, 10);
     border-top: 3px solid red;
